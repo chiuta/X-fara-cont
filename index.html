@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<!--
+  X fara cont / X without account / X sans compte / X senza account /
+  X sin cuenta / X sem conta / X ohne Konto
+  Trusa single-file, fara build, fara telemetrie proprie. 7 limbi: RO EN FR IT ES PT DE.
+  Patru canale: link direct, arhiva Wayback (verificare live prin API-ul archive.org),
+  index de cautare, status oglinzi Nitter.
+-->
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 7 limbi, un singur fișier HTML, fără telemetrie.">
+<meta property="og:title" content="X fără cont — post de ascultare">
+<meta property="og:description" content="Vizualizează profiluri publice X fără cont: link direct, Wayback, index de căutare, Nitter. 7 limbi.">
+<meta property="og:type" content="website">
+<title>X fără cont — post de ascultare</title>
+<style>
+  :root {
+    --bg: #14181c;
+    --surface: #1b2127;
+    --surface-2: #232a31;
+    --border: #2b333b;
+    --text: #e9e5db;
+    --text-muted: #8b939b;
+    --amber: #e8a33d;
+    --green: #6fbf8b;
+    --red: #c4634f;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  [hidden] { display: none !important; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body { min-height: 100vh; padding: 40px 20px 64px; }
+
+  .console { max-width: 640px; margin: 0 auto; }
+
+  .langbar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 26px; }
+
+  .langbtn {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    min-height: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 100px;
+    cursor: pointer;
+  }
+
+  .langbtn:hover { color: var(--text); border-color: var(--text-muted); }
+
+  .langbtn[aria-pressed="true"] {
+    color: #1a1305;
+    background: var(--amber);
+    border-color: var(--amber);
+    font-weight: 700;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: var(--mono);
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+
+  h1 .dim { color: var(--text-muted); font-weight: 500; }
+
+  .lede {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0 0 28px;
+    max-width: 54ch;
+  }
+
+  .tuner { display: flex; gap: 10px; margin-bottom: 36px; }
+
+  .tuner input {
+    flex: 1;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    padding: 13px 14px;
+    border-radius: 8px;
+  }
+
+  .tuner input::placeholder { color: var(--text-muted); }
+
+  .tuner button {
+    background: var(--amber);
+    color: #1a1305;
+    border: none;
+    font-family: var(--mono);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    padding: 13px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .tuner button:hover { background: #f0b358; }
+
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; }
+
+  .channels { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+
+  .channel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+
+  .channel__head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+
+  .channel__head h2 {
+    font-family: var(--mono);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0;
+    flex: 1;
+  }
+
+  .channel__tag {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    padding: 3px 8px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted); flex-shrink: 0; }
+  .dot--amber { background: var(--amber); }
+  .dot--green { background: var(--green); }
+  .dot--red { background: var(--red); }
+
+  .channel__desc { font-size: 0.88rem; line-height: 1.55; color: var(--text-muted); margin: 0 0 12px; }
+
+  .channel__hint { font-size: 0.82rem; color: var(--text-muted); margin: 10px 0 0; }
+
+  .channel__hint code {
+    font-family: var(--mono);
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .channel__actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+  .channel__actions a {
+    color: var(--amber);
+    font-size: 0.88rem;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .channel__actions a:hover { border-bottom-color: var(--amber); }
+
+  .sweep {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    margin: 4px 0 14px;
+  }
+
+  .sweep span {
+    position: absolute;
+    top: 0; left: -30%;
+    width: 30%; height: 100%;
+    background: var(--amber);
+    animation: sweep 1.3s ease-in-out infinite;
+  }
+
+  @keyframes sweep {
+    0% { left: -30%; }
+    50% { left: 100%; }
+    100% { left: -30%; }
+  }
+
+  .channel__frame {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    background: #0c0f12;
+  }
+
+  .channel__frame iframe { width: 100%; height: 320px; border: 0; display: block; }
+
+  .frame__caption { font-size: 0.78rem; color: var(--text-muted); margin: 0 0 12px; }
+
+  .why {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 4px 20px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .why summary { cursor: pointer; padding: 14px 0; font-family: var(--mono); font-size: 0.8rem; color: var(--text); }
+
+  .why p { line-height: 1.6; margin: 0 0 16px; }
+
+  footer { margin-top: 28px; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+
+  .tuner input[aria-invalid="true"] { border-color: var(--red); }
+  #handleError.errmsg { color: #e8917d; font-size: 0.85rem; margin: -26px 0 30px; }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 1.7rem; }
+    .tuner { flex-direction: column; }
+    .tuner button { width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sweep span { animation: none; left: 0; width: 100%; opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+  <noscript><p style="max-width:640px;margin:0 auto 20px;color:#e9e5db">Această unealtă are nevoie de JavaScript. / This tool needs JavaScript.</p></noscript>
+  <main class="console">
+
+    <nav class="langbar" id="langbar" aria-label="Limbă / Language">
+      <button type="button" class="langbtn" data-lang="ro">RO</button>
+      <button type="button" class="langbtn" data-lang="en">EN</button>
+      <button type="button" class="langbtn" data-lang="fr">FR</button>
+      <button type="button" class="langbtn" data-lang="it">IT</button>
+      <button type="button" class="langbtn" data-lang="es">ES</button>
+      <button type="button" class="langbtn" data-lang="pt">PT</button>
+      <button type="button" class="langbtn" data-lang="de">DE</button>
+    </nav>
+
+    <header>
+      <p class="eyebrow" id="txtEyebrow"></p>
+      <h1>X <span class="dim" id="txtH1Prep"></span> <span id="txtH1Noun"></span></h1>
+      <p class="lede" id="txtLede"></p>
+    </header>
+
+    <form class="tuner" id="tunerForm">
+      <label for="handleInput" class="visually-hidden" id="txtInputLabel"></label>
+      <input type="text" id="handleInput" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" aria-describedby="handleError">
+      <button type="submit" id="txtScanBtn"></button>
+    </form>
+    <p id="handleError" class="visually-hidden" role="alert"></p>
+
+    <section class="channels" id="channels" hidden>
+
+      <article class="channel">
+        <div class="channel__head">
+          <span class="dot dot--amber"></span>
+          <h2 id="txtDirectH2"></h2>
+          <span class="channel__tag" id="txtDirectTag"></span>
+        </div>
+        <p class="channel__desc" id="txtDirectDesc"></p>
+        <div class="channel__actions">
+          <a id="linkX" target="_blank" rel="noopener noreferrer"></a>
+          <a id="linkTwitter" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+        <p class="channel__hint" id="txtDirectHint"></p>
+      </article>
+
+      <article class="channel">
+        <div class="channel__head">
+          <span class="dot" id="archiveDot"></span>
+          <h2 id="txtArchiveH2"></h2>
+          <span class="channel__tag" id="txtArchiveTag"></span>
+        </div>
+        <p class="channel__desc" id="archiveDesc" aria-live="polite"></p>
+        <div class="sweep" id="archiveSweep" hidden><span></span></div>
+        <div class="channel__frame" id="archiveFrameWrap" hidden>
+          <iframe id="archiveFrame" referrerpolicy="no-referrer" sandbox="allow-same-origin" loading="lazy"></iframe>
+        </div>
+        <p class="frame__caption" id="frameCaption" hidden></p>
+        <div class="channel__actions" id="archiveActions"></div>
+      </article>
+
+      <article class="channel">
+        <div class="channel__head">
+          <span class="dot dot--amber"></span>
+          <h2 id="txtIndexH2"></h2>
+          <span class="channel__tag" id="txtIndexTag"></span>
+        </div>
+        <p class="channel__desc" id="txtIndexDesc"></p>
+        <div class="channel__actions">
+          <a id="linkGoogle" target="_blank" rel="noopener noreferrer"></a>
+          <a id="linkBing" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+      </article>
+
+      <article class="channel">
+        <div class="channel__head">
+          <span class="dot dot--red"></span>
+          <h2 id="txtNitterH2"></h2>
+          <span class="channel__tag" id="txtNitterTag"></span>
+        </div>
+        <p class="channel__desc" id="txtNitterDesc"></p>
+        <div class="channel__actions">
+          <a href="https://github.com/zedeus/nitter/wiki/Instances" target="_blank" rel="noopener noreferrer" id="txtNitterLink"></a>
+        </div>
+        <p class="channel__hint"><span id="txtNitterHintPrefix"></span> <code><span id="txtNitterHintDomain"></span>/<span id="nitterHandlePreview">handle</span></code>.</p>
+      </article>
+
+    </section>
+
+    <details class="why">
+      <summary id="txtWhySummary"></summary>
+      <p id="txtWhyP1"></p>
+      <p id="txtWhyP2"></p>
+    </details>
+
+    <footer id="txtFooter"></footer>
+  </main>
+
+<script>
+(function () {
+  var STRINGS = {
+    ro: {
+      title: "X fără cont — post de ascultare",
+      eyebrow: "Post de ascultare",
+      h1Prep: "fără",
+      h1Noun: "cont",
+      lede: "Introdu un profil public de pe X (ex-Twitter). Trusa verifică patru canale de acces independente — niciunul garantat, toate reale, fiindcă X a închis aproape orice altă cale în 2026.",
+      inputLabel: "Profil X sau Twitter, fără @",
+      placeholder: "@handle sau link de profil",
+      scanBtn: "Scanează",
+      direct: {
+        h2: "Acces direct",
+        tag: "rapid, fragil",
+        desc: "Profilurile publice mai răspund uneori la primele vizualizări, înainte ca X să ceară autentificare. Fără nicio garanție — depinde de cont și de sesiunea ta.",
+        hint: "Fiecare profil vizionat fără cont consumă din pragul de toleranță al sesiunii — următoarele pot cere login mai devreme.",
+        openX: function (h) { return "Deschide x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Deschide twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Arhivă Wayback",
+        tag: "static, dar sigur",
+        checking: "Se verifică archive.org pentru cel mai recent instantaneu…",
+        found: function (w) { return "Instantaneu găsit din " + w + "."; },
+        notFound: "Nicio arhivă găsită pentru acest profil. Poți cere una chiar tu, mai jos.",
+        frameCaption: "Dacă zona de mai sus rămâne goală, arhiva a moștenit restricția de „frame” a paginii originale — folosește linkul de mai jos.",
+        frameTitle: "Instantaneu arhivat",
+        openWayback: "Deschide în Wayback Machine →",
+        requestNew: "Cere un instantaneu nou →",
+        unknownDate: "dată necunoscută",
+        months: ["ian","feb","mar","apr","mai","iun","iul","aug","sep","oct","nov","dec"]
+      },
+      index: {
+        h2: "Index de căutare",
+        tag: "ce a apucat să fie indexat",
+        desc: "Motoarele de căutare păstrează în index fragmente publice, uneori inclusiv postări pe care X nu le mai arată vizitatorilor neautentificați.",
+        google: "Caută pe Google →",
+        bing: "Caută pe Bing →"
+      },
+      nitter: {
+        h2: "Oglinzi Nitter",
+        tag: "instabil în 2026",
+        desc: "Majoritatea instanțelor publice Nitter au picat — X le-a tăiat accesul la conturile pe care se bazau pentru a prelua conținut. Ce mai funcționează se schimbă de la o săptămână la alta.",
+        link: "Vezi instanțele active acum →",
+        hintPrefix: "Pe o instanță activă, tiparul e",
+        hintDomain: "instanță.tld"
+      },
+      why: {
+        summary: "De ce nu există un „adevărat” scraper într-un singur fișier HTML",
+        p1: "Un scraper real ar citi răspunsul brut trimis de x.com direct din JavaScript, în pagina ta. Browserul blochează asta prin CORS: x.com nu trimite anteturile care ar lăsa un site străin să-i citească răspunsul. Chiar ocolind asta printr-un proxy, X cere acum autentificare la nivel de server pentru aproape tot conținutul — inclusiv pentru propriile widget-uri oficiale de embed, care de la un punct încolo afișează gol pentru vizitatorii fără cont. Nitter, alternativa clasică, a picat din același motiv.",
+        p2: "Ce rămâne fiabil fără server propriu sunt exact canalele de mai sus. Pentru un flux live garantat, ar trebui un mic server propriu — de exemplu Nitter sau RSS-Bridge auto-găzduite, cu token-uri de cont proprii. Pot să te ajut separat cu asta, dacă vrei să mergi mai departe."
+      },
+      footer: "Fără telemetrie și fără cont. Linkurile se generează local. La „Scanează”, numele profilului este trimis către archive.org (până la două interogări, pentru x.com și twitter.com), iar instantaneul găsit se încarcă din web.archive.org. Google, Bing, X și Nitter se deschid doar dacă apeși pe link."
+    },
+
+    en: {
+      title: "X without an account — listening post",
+      eyebrow: "Listening post",
+      h1Prep: "without an",
+      h1Noun: "account",
+      lede: "Enter a public profile from X (formerly Twitter). This toolkit checks four independent access channels — none guaranteed, all real, because X has shut down almost every other route in 2026.",
+      inputLabel: "X or Twitter profile, without the @",
+      placeholder: "@handle or profile link",
+      scanBtn: "Scan",
+      direct: {
+        h2: "Direct access",
+        tag: "fast, fragile",
+        desc: "Public profiles still sometimes respond on the first few views, before X asks you to sign in. No guarantee at all — it depends on the account and your session.",
+        hint: "Every profile viewed without an account eats into your session's tolerance threshold — the next ones may ask for login sooner.",
+        openX: function (h) { return "Open x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Open twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Wayback archive",
+        tag: "static, but reliable",
+        checking: "Checking archive.org for the most recent snapshot…",
+        found: function (w) { return "Snapshot found from " + w + "."; },
+        notFound: "No archive found for this profile. You can request one yourself, below.",
+        frameCaption: "If the area above stays empty, the archive also inherited the original page's “frame” restriction — use the link below instead.",
+        frameTitle: "Archived snapshot",
+        openWayback: "Open in Wayback Machine →",
+        requestNew: "Request a new snapshot →",
+        unknownDate: "unknown date",
+        months: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+      },
+      index: {
+        h2: "Search index",
+        tag: "whatever got indexed",
+        desc: "Search engines keep public fragments in their index, sometimes including posts X no longer shows to unauthenticated visitors.",
+        google: "Search on Google →",
+        bing: "Search on Bing →"
+      },
+      nitter: {
+        h2: "Nitter mirrors",
+        tag: "unstable in 2026",
+        desc: "Most public Nitter instances have gone down — X cut off their access to the accounts they relied on to pull content. What still works changes from week to week.",
+        link: "See which instances are active now →",
+        hintPrefix: "On an active instance, the pattern is",
+        hintDomain: "instance.tld"
+      },
+      why: {
+        summary: "Why there's no “real” scraper in a single HTML file",
+        p1: "A real scraper would need to read the raw response x.com sends, directly from JavaScript running on your page. The browser blocks this through CORS: x.com doesn't send the headers that would let a foreign site read its response. Even routing around that with a proxy, X now requires server-side authentication for almost all content — including its own official embed widgets, which past a point show blank for visitors without an account. Nitter, the classic alternative, went down for the same reason.",
+        p2: "What remains reliable without your own server are exactly the channels above. For a guaranteed live feed, you'd need a small server of your own — for example a self-hosted Nitter or RSS-Bridge instance, with your own account tokens. I can help you with that separately, if you want to go further."
+      },
+      footer: "No telemetry, no account. Links are generated locally. On “Scan”, the profile name is sent to archive.org (up to two queries, for x.com and twitter.com) and the snapshot found is loaded from web.archive.org. Google, Bing, X and Nitter open only if you click the link."
+    },
+
+    fr: {
+      title: "X sans compte — poste d'écoute",
+      eyebrow: "Poste d'écoute",
+      h1Prep: "sans",
+      h1Noun: "compte",
+      lede: "Entrez un profil public sur X (ex-Twitter). Cet outil vérifie quatre canaux d'accès indépendants — aucun garanti, tous réels, car X a fermé presque toutes les autres voies en 2026.",
+      inputLabel: "Profil X ou Twitter, sans le @",
+      placeholder: "@identifiant ou lien de profil",
+      scanBtn: "Scanner",
+      direct: {
+        h2: "Accès direct",
+        tag: "rapide, fragile",
+        desc: "Les profils publics répondent parfois encore aux premières visites, avant que X ne demande une connexion. Aucune garantie — tout dépend du compte et de votre session.",
+        hint: "Chaque profil consulté sans compte entame le seuil de tolérance de votre session — les suivants peuvent demander une connexion plus tôt.",
+        openX: function (h) { return "Ouvrir x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Ouvrir twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Archive Wayback",
+        tag: "statique, mais fiable",
+        checking: "Recherche sur archive.org du dernier instantané disponible…",
+        found: function (w) { return "Instantané trouvé du " + w + "."; },
+        notFound: "Aucune archive trouvée pour ce profil. Vous pouvez en demander une vous-même, ci-dessous.",
+        frameCaption: "Si la zone ci-dessus reste vide, l'archive a aussi hérité de la restriction « frame » de la page d'origine — utilisez plutôt le lien ci-dessous.",
+        frameTitle: "Instantané archivé",
+        openWayback: "Ouvrir dans Wayback Machine →",
+        requestNew: "Demander un nouvel instantané →",
+        unknownDate: "date inconnue",
+        months: ["janv","févr","mars","avr","mai","juin","juil","août","sept","oct","nov","déc"]
+      },
+      index: {
+        h2: "Index de recherche",
+        tag: "ce qui a été indexé",
+        desc: "Les moteurs de recherche gardent en index des fragments publics, parfois même des publications que X ne montre plus aux visiteurs non connectés.",
+        google: "Chercher sur Google →",
+        bing: "Chercher sur Bing →"
+      },
+      nitter: {
+        h2: "Miroirs Nitter",
+        tag: "instable en 2026",
+        desc: "La plupart des instances publiques de Nitter sont hors service — X a coupé l'accès aux comptes dont elles dépendaient pour récupérer le contenu. Ce qui fonctionne encore change d'une semaine à l'autre.",
+        link: "Voir les instances actives en ce moment →",
+        hintPrefix: "Sur une instance active, le format est",
+        hintDomain: "instance.tld"
+      },
+      why: {
+        summary: "Pourquoi il n'existe pas de « vrai » scraper dans un seul fichier HTML",
+        p1: "Un vrai scraper devrait lire la réponse brute envoyée par x.com directement depuis le JavaScript exécuté sur votre page. Le navigateur bloque cela via CORS : x.com n'envoie pas les en-têtes qui permettraient à un site tiers de lire sa réponse. Même en contournant cela avec un proxy, X exige désormais une authentification côté serveur pour presque tout le contenu — y compris pour ses propres widgets d'intégration officiels, qui au-delà d'un certain point s'affichent vides pour les visiteurs sans compte. Nitter, l'alternative classique, est tombé pour la même raison.",
+        p2: "Ce qui reste fiable sans serveur personnel, ce sont exactement les canaux ci-dessus. Pour un flux en direct garanti, il faudrait un petit serveur personnel — par exemple une instance Nitter ou RSS-Bridge auto-hébergée, avec vos propres jetons de compte. Je peux vous aider séparément avec ça, si vous voulez aller plus loin."
+      },
+      footer: "Aucune télémétrie, aucun compte. Les liens sont générés localement. Avec « Scanner », le nom du profil est envoyé à archive.org (jusqu'à deux requêtes, pour x.com et twitter.com) et l'instantané trouvé est chargé depuis web.archive.org. Google, Bing, X et Nitter ne s'ouvrent que si vous cliquez sur le lien."
+    },
+
+    it: {
+      title: "X senza account — posto d'ascolto",
+      eyebrow: "Posto d'ascolto",
+      h1Prep: "senza",
+      h1Noun: "account",
+      lede: "Inserisci un profilo pubblico su X (ex Twitter). Questo strumento verifica quattro canali di accesso indipendenti — nessuno garantito, tutti reali, perché X ha chiuso quasi ogni altra via nel 2026.",
+      inputLabel: "Profilo X o Twitter, senza @",
+      placeholder: "@handle o link al profilo",
+      scanBtn: "Scansiona",
+      direct: {
+        h2: "Accesso diretto",
+        tag: "veloce, fragile",
+        desc: "I profili pubblici a volte rispondono ancora alle prime visualizzazioni, prima che X chieda di accedere. Nessuna garanzia — dipende dall'account e dalla tua sessione.",
+        hint: "Ogni profilo visto senza account consuma la soglia di tolleranza della sessione — i successivi potrebbero chiedere il login prima.",
+        openX: function (h) { return "Apri x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Apri twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Archivio Wayback",
+        tag: "statico, ma affidabile",
+        checking: "Verifica su archive.org dell'istantanea più recente…",
+        found: function (w) { return "Istantanea trovata del " + w + "."; },
+        notFound: "Nessun archivio trovato per questo profilo. Puoi richiederne uno tu stesso, qui sotto.",
+        frameCaption: "Se l'area sopra resta vuota, l'archivio ha ereditato anche la restrizione «frame» della pagina originale — usa invece il link qui sotto.",
+        frameTitle: "Istantanea archiviata",
+        openWayback: "Apri in Wayback Machine →",
+        requestNew: "Richiedi una nuova istantanea →",
+        unknownDate: "data sconosciuta",
+        months: ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"]
+      },
+      index: {
+        h2: "Indice di ricerca",
+        tag: "quel che è stato indicizzato",
+        desc: "I motori di ricerca conservano nell'indice frammenti pubblici, a volte anche post che X non mostra più ai visitatori non autenticati.",
+        google: "Cerca su Google →",
+        bing: "Cerca su Bing →"
+      },
+      nitter: {
+        h2: "Specchi Nitter",
+        tag: "instabile nel 2026",
+        desc: "La maggior parte delle istanze pubbliche di Nitter è fuori uso — X ha tagliato l'accesso agli account da cui dipendevano per recuperare i contenuti. Ciò che ancora funziona cambia di settimana in settimana.",
+        link: "Vedi le istanze attive adesso →",
+        hintPrefix: "Su un'istanza attiva, lo schema è",
+        hintDomain: "istanza.tld"
+      },
+      why: {
+        summary: "Perché non esiste un «vero» scraper in un unico file HTML",
+        p1: "Uno scraper vero dovrebbe leggere la risposta grezza inviata da x.com direttamente dal JavaScript in esecuzione sulla tua pagina. Il browser blocca questo tramite CORS: x.com non invia le intestazioni che permetterebbero a un sito esterno di leggerne la risposta. Anche aggirando questo con un proxy, X ora richiede l'autenticazione lato server per quasi tutti i contenuti — inclusi i suoi stessi widget ufficiali di embed, che oltre un certo punto appaiono vuoti per i visitatori senza account. Nitter, l'alternativa classica, è caduto per lo stesso motivo.",
+        p2: "Ciò che resta affidabile senza un server proprio sono esattamente i canali sopra. Per un flusso live garantito servirebbe un piccolo server proprio — per esempio un'istanza Nitter o RSS-Bridge autogestita, con i tuoi token d'account. Posso aiutarti separatamente con questo, se vuoi andare oltre."
+      },
+      footer: "Nessuna telemetria, nessun account. I link sono generati localmente. Con «Scansiona», il nome del profilo viene inviato ad archive.org (fino a due richieste, per x.com e twitter.com) e lo snapshot trovato viene caricato da web.archive.org. Google, Bing, X e Nitter si aprono solo se clicchi sul link."
+    },
+
+    es: {
+      title: "X sin cuenta — puesto de escucha",
+      eyebrow: "Puesto de escucha",
+      h1Prep: "sin",
+      h1Noun: "cuenta",
+      lede: "Introduce un perfil público de X (antes Twitter). Esta herramienta comprueba cuatro canales de acceso independientes — ninguno garantizado, todos reales, porque X ha cerrado casi cualquier otra vía en 2026.",
+      inputLabel: "Perfil de X o Twitter, sin la @",
+      placeholder: "@usuario o enlace de perfil",
+      scanBtn: "Escanear",
+      direct: {
+        h2: "Acceso directo",
+        tag: "rápido, frágil",
+        desc: "Los perfiles públicos a veces todavía responden en las primeras visitas, antes de que X pida iniciar sesión. Sin ninguna garantía — depende de la cuenta y de tu sesión.",
+        hint: "Cada perfil visto sin cuenta consume el umbral de tolerancia de la sesión — los siguientes pueden pedir inicio de sesión antes.",
+        openX: function (h) { return "Abrir x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Abrir twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Archivo Wayback",
+        tag: "estático, pero fiable",
+        checking: "Comprobando en archive.org la instantánea más reciente…",
+        found: function (w) { return "Instantánea encontrada del " + w + "."; },
+        notFound: "No se encontró ningún archivo para este perfil. Puedes pedir uno tú mismo, más abajo.",
+        frameCaption: "Si el área de arriba queda vacía, el archivo también heredó la restricción de «frame» de la página original — usa el enlace de abajo.",
+        frameTitle: "Instantánea archivada",
+        openWayback: "Abrir en Wayback Machine →",
+        requestNew: "Pedir una nueva instantánea →",
+        unknownDate: "fecha desconocida",
+        months: ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"]
+      },
+      index: {
+        h2: "Índice de búsqueda",
+        tag: "lo que llegó a indexarse",
+        desc: "Los motores de búsqueda guardan en su índice fragmentos públicos, a veces incluso publicaciones que X ya no muestra a los visitantes sin sesión iniciada.",
+        google: "Buscar en Google →",
+        bing: "Buscar en Bing →"
+      },
+      nitter: {
+        h2: "Espejos Nitter",
+        tag: "inestable en 2026",
+        desc: "La mayoría de las instancias públicas de Nitter han caído — X les cortó el acceso a las cuentas de las que dependían para obtener contenido. Lo que aún funciona cambia de una semana a otra.",
+        link: "Ver las instancias activas ahora →",
+        hintPrefix: "En una instancia activa, el patrón es",
+        hintDomain: "instancia.tld"
+      },
+      why: {
+        summary: "Por qué no existe un scraper «real» en un solo archivo HTML",
+        p1: "Un scraper real tendría que leer la respuesta en bruto que envía x.com directamente desde JavaScript ejecutado en tu página. El navegador bloquea esto mediante CORS: x.com no envía las cabeceras que permitirían a un sitio externo leer su respuesta. Incluso evitando esto con un proxy, X exige ahora autenticación a nivel de servidor para casi todo el contenido — incluidos sus propios widgets oficiales de inserción, que a partir de cierto punto se muestran vacíos para los visitantes sin cuenta. Nitter, la alternativa clásica, cayó por el mismo motivo.",
+        p2: "Lo que sigue siendo fiable sin servidor propio son exactamente los canales de arriba. Para un flujo en vivo garantizado haría falta un pequeño servidor propio — por ejemplo una instancia de Nitter o RSS-Bridge autoalojada, con tus propios tokens de cuenta. Puedo ayudarte por separado con eso, si quieres ir más allá."
+      },
+      footer: "Sin telemetría ni cuenta. Los enlaces se generan localmente. Con «Escanear», el nombre del perfil se envía a archive.org (hasta dos consultas, para x.com y twitter.com) y la captura encontrada se carga desde web.archive.org. Google, Bing, X y Nitter solo se abren si haces clic en el enlace."
+    },
+
+    pt: {
+      title: "X sem conta — posto de escuta",
+      eyebrow: "Posto de escuta",
+      h1Prep: "sem",
+      h1Noun: "conta",
+      lede: "Indica um perfil público do X (antigo Twitter). Esta ferramenta verifica quatro canais de acesso independentes — nenhum garantido, todos reais, porque o X fechou quase todas as outras vias em 2026.",
+      inputLabel: "Perfil do X ou Twitter, sem o @",
+      placeholder: "@identificador ou link do perfil",
+      scanBtn: "Escanear",
+      direct: {
+        h2: "Acesso direto",
+        tag: "rápido, frágil",
+        desc: "Os perfis públicos por vezes ainda respondem nas primeiras visitas, antes de o X pedir para iniciar sessão. Sem qualquer garantia — depende da conta e da tua sessão.",
+        hint: "Cada perfil visto sem conta consome o limite de tolerância da sessão — os seguintes podem pedir login mais cedo.",
+        openX: function (h) { return "Abrir x.com/" + h + " →"; },
+        openTwitter: function (h) { return "Abrir twitter.com/" + h + " →"; }
+      },
+      archive: {
+        h2: "Arquivo Wayback",
+        tag: "estático, mas fiável",
+        checking: "A verificar no archive.org o instantâneo mais recente…",
+        found: function (w) { return "Instantâneo encontrado de " + w + "."; },
+        notFound: "Não foi encontrado nenhum arquivo para este perfil. Podes pedir um tu mesmo, abaixo.",
+        frameCaption: "Se a área acima ficar vazia, o arquivo também herdou a restrição de «frame» da página original — usa antes o link abaixo.",
+        frameTitle: "Instantâneo arquivado",
+        openWayback: "Abrir no Wayback Machine →",
+        requestNew: "Pedir um novo instantâneo →",
+        unknownDate: "data desconhecida",
+        months: ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"]
+      },
+      index: {
+        h2: "Índice de pesquisa",
+        tag: "o que chegou a ser indexado",
+        desc: "Os motores de busca guardam no índice fragmentos públicos, por vezes incluindo publicações que o X já não mostra a visitantes sem sessão iniciada.",
+        google: "Pesquisar no Google →",
+        bing: "Pesquisar no Bing →"
+      },
+      nitter: {
+        h2: "Espelhos Nitter",
+        tag: "instável em 2026",
+        desc: "A maioria das instâncias públicas do Nitter deixou de funcionar — o X cortou o acesso às contas de que dependiam para obter conteúdo. O que ainda funciona muda de semana para semana.",
+        link: "Ver as instâncias ativas agora →",
+        hintPrefix: "Numa instância ativa, o padrão é",
+        hintDomain: "instância.tld"
+      },
+      why: {
+        summary: "Porque não existe um scraper «a sério» num único ficheiro HTML",
+        p1: "Um scraper a sério teria de ler a resposta em bruto enviada pelo x.com diretamente a partir de JavaScript executado na tua página. O navegador bloqueia isto através de CORS: o x.com não envia os cabeçalhos que permitiriam a um site externo ler a sua resposta. Mesmo contornando isto com um proxy, o X exige agora autenticação do lado do servidor para quase todo o conteúdo — incluindo os seus próprios widgets oficiais de incorporação, que a partir de certo ponto aparecem vazios para visitantes sem conta. O Nitter, a alternativa clássica, caiu pelo mesmo motivo.",
+        p2: "O que continua fiável sem servidor próprio são exatamente os canais acima. Para um fluxo em direto garantido, seria preciso um pequeno servidor próprio — por exemplo uma instância Nitter ou RSS-Bridge auto-hospedada, com os teus próprios tokens de conta. Posso ajudar-te separadamente com isso, se quiseres ir mais longe."
+      },
+      footer: "Sem telemetria nem conta. Os links são gerados localmente. Em «Verificar», o nome do perfil é enviado ao archive.org (até duas consultas, para x.com e twitter.com) e o instantâneo encontrado é carregado a partir de web.archive.org. Google, Bing, X e Nitter só abrem se clicares no link."
+    },
+
+    de: {
+      title: "X ohne Konto — Horchposten",
+      eyebrow: "Horchposten",
+      h1Prep: "ohne",
+      h1Noun: "Konto",
+      lede: "Gib ein öffentliches Profil von X (ehemals Twitter) ein. Dieses Werkzeug prüft vier unabhängige Zugangskanäle — keiner garantiert, alle real, denn X hat 2026 fast jeden anderen Weg geschlossen.",
+      inputLabel: "X- oder Twitter-Profil, ohne @",
+      placeholder: "@Handle oder Profil-Link",
+      scanBtn: "Scannen",
+      direct: {
+        h2: "Direkter Zugang",
+        tag: "schnell, brüchig",
+        desc: "Öffentliche Profile antworten bei den ersten Aufrufen manchmal noch, bevor X zur Anmeldung auffordert. Keine Garantie — es hängt vom Konto und deiner Sitzung ab.",
+        hint: "Jedes ohne Konto angesehene Profil zehrt an der Toleranzschwelle deiner Sitzung — die nächsten fordern eventuell früher zur Anmeldung auf.",
+        openX: function (h) { return "x.com/" + h + " öffnen →"; },
+        openTwitter: function (h) { return "twitter.com/" + h + " öffnen →"; }
+      },
+      archive: {
+        h2: "Wayback-Archiv",
+        tag: "statisch, aber zuverlässig",
+        checking: "archive.org wird nach dem neuesten Schnappschuss durchsucht…",
+        found: function (w) { return "Schnappschuss gefunden vom " + w + "."; },
+        notFound: "Kein Archiv für dieses Profil gefunden. Du kannst unten selbst eines anfordern.",
+        frameCaption: "Bleibt der Bereich oben leer, hat das Archiv auch die „Frame“-Beschränkung der Originalseite geerbt — nutze stattdessen den Link unten.",
+        frameTitle: "Archivierter Schnappschuss",
+        openWayback: "In der Wayback Machine öffnen →",
+        requestNew: "Neuen Schnappschuss anfordern →",
+        unknownDate: "unbekanntes Datum",
+        months: ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"]
+      },
+      index: {
+        h2: "Suchindex",
+        tag: "was indexiert wurde",
+        desc: "Suchmaschinen behalten öffentliche Ausschnitte in ihrem Index, manchmal sogar Beiträge, die X Besuchern ohne Konto nicht mehr zeigt.",
+        google: "Auf Google suchen →",
+        bing: "Auf Bing suchen →"
+      },
+      nitter: {
+        h2: "Nitter-Spiegel",
+        tag: "2026 instabil",
+        desc: "Die meisten öffentlichen Nitter-Instanzen sind ausgefallen — X hat ihnen den Zugriff auf die Konten gekappt, von denen sie zum Abrufen von Inhalten abhingen. Was noch funktioniert, ändert sich von Woche zu Woche.",
+        link: "Aktive Instanzen jetzt ansehen →",
+        hintPrefix: "Bei einer aktiven Instanz lautet das Muster",
+        hintDomain: "instanz.tld"
+      },
+      why: {
+        summary: "Warum es keinen „echten“ Scraper in einer einzigen HTML-Datei gibt",
+        p1: "Ein echter Scraper müsste die rohe Antwort, die x.com sendet, direkt aus JavaScript lesen, das auf deiner Seite läuft. Der Browser blockiert das per CORS: x.com sendet nicht die Header, die einer fremden Seite erlauben würden, ihre Antwort zu lesen. Selbst wenn man das über einen Proxy umgeht, verlangt X inzwischen serverseitige Authentifizierung für fast alle Inhalte — auch für die eigenen offiziellen Embed-Widgets, die ab einem bestimmten Punkt für Besucher ohne Konto leer bleiben. Nitter, die klassische Alternative, ist aus demselben Grund ausgefallen.",
+        p2: "Was ohne eigenen Server zuverlässig bleibt, sind genau die Kanäle oben. Für einen garantierten Live-Feed bräuchte es einen eigenen kleinen Server — zum Beispiel eine selbst gehostete Nitter- oder RSS-Bridge-Instanz mit eigenen Konto-Tokens. Dabei helfe ich dir gern separat weiter, falls du das vertiefen willst."
+      },
+      footer: "Keine Telemetrie, kein Konto. Links werden lokal erzeugt. Bei „Scannen“ wird der Profilname an archive.org gesendet (bis zu zwei Abfragen, für x.com und twitter.com) und der gefundene Schnappschuss von web.archive.org geladen. Google, Bing, X und Nitter öffnen sich nur, wenn du auf den Link klickst."
+    }
+  };
+
+  var SUPPORTED = ["ro","en","fr","it","es","pt","de"];
+
+  function detectLang() {
+    var raw = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "ro"];
+    for (var i = 0; i < raw.length; i++) {
+      var code = (raw[i] || "").slice(0, 2).toLowerCase();
+      if (SUPPORTED.indexOf(code) !== -1) return code;
+    }
+    return "ro";
+  }
+
+  var state = { lang: detectLang(), handle: "", archiveStatus: "idle", archiveSnap: null };
+
+  var langbar = document.getElementById("langbar");
+  var form = document.getElementById("tunerForm");
+  var input = document.getElementById("handleInput");
+  var channels = document.getElementById("channels");
+
+  var txtEyebrow = document.getElementById("txtEyebrow");
+  var txtH1Prep = document.getElementById("txtH1Prep");
+  var txtH1Noun = document.getElementById("txtH1Noun");
+  var txtLede = document.getElementById("txtLede");
+  var txtInputLabel = document.getElementById("txtInputLabel");
+  var txtScanBtn = document.getElementById("txtScanBtn");
+
+  var txtDirectH2 = document.getElementById("txtDirectH2");
+  var txtDirectTag = document.getElementById("txtDirectTag");
+  var txtDirectDesc = document.getElementById("txtDirectDesc");
+  var txtDirectHint = document.getElementById("txtDirectHint");
+  var linkX = document.getElementById("linkX");
+  var linkTwitter = document.getElementById("linkTwitter");
+
+  var txtArchiveH2 = document.getElementById("txtArchiveH2");
+  var txtArchiveTag = document.getElementById("txtArchiveTag");
+  var archiveDot = document.getElementById("archiveDot");
+  var archiveDesc = document.getElementById("archiveDesc");
+  var archiveSweep = document.getElementById("archiveSweep");
+  var archiveFrameWrap = document.getElementById("archiveFrameWrap");
+  var archiveFrame = document.getElementById("archiveFrame");
+  var frameCaption = document.getElementById("frameCaption");
+  var archiveActions = document.getElementById("archiveActions");
+
+  var txtIndexH2 = document.getElementById("txtIndexH2");
+  var txtIndexTag = document.getElementById("txtIndexTag");
+  var txtIndexDesc = document.getElementById("txtIndexDesc");
+  var linkGoogle = document.getElementById("linkGoogle");
+  var linkBing = document.getElementById("linkBing");
+
+  var txtNitterH2 = document.getElementById("txtNitterH2");
+  var txtNitterTag = document.getElementById("txtNitterTag");
+  var txtNitterDesc = document.getElementById("txtNitterDesc");
+  var txtNitterLink = document.getElementById("txtNitterLink");
+  var txtNitterHintPrefix = document.getElementById("txtNitterHintPrefix");
+  var txtNitterHintDomain = document.getElementById("txtNitterHintDomain");
+  var nitterHandlePreview = document.getElementById("nitterHandlePreview");
+
+  var txtWhySummary = document.getElementById("txtWhySummary");
+  var txtWhyP1 = document.getElementById("txtWhyP1");
+  var txtWhyP2 = document.getElementById("txtWhyP2");
+  var txtFooter = document.getElementById("txtFooter");
+
+  var EXTRA = {
+    ro: { invalid: "Nume de profil invalid. Folosește 1–15 litere, cifre sau _ (ex. @nume).", error: "Nu am putut interoga archive.org (rețea indisponibilă sau răspuns neașteptat). Poți încerca direct în Wayback Machine." },
+    en: { invalid: "Invalid profile name. Use 1–15 letters, digits or _ (e.g. @name).", error: "Could not query archive.org (network unavailable or unexpected reply). You can try the Wayback Machine directly." },
+    fr: { invalid: "Nom de profil invalide. Utilisez 1 à 15 lettres, chiffres ou _ (ex. @nom).", error: "Impossible d'interroger archive.org (réseau indisponible ou réponse inattendue). Vous pouvez essayer directement la Wayback Machine." },
+    it: { invalid: "Nome profilo non valido. Usa da 1 a 15 lettere, cifre o _ (es. @nome).", error: "Impossibile interrogare archive.org (rete non disponibile o risposta inattesa). Puoi provare direttamente la Wayback Machine." },
+    es: { invalid: "Nombre de perfil no válido. Usa de 1 a 15 letras, cifras o _ (p. ej. @nombre).", error: "No se pudo consultar archive.org (red no disponible o respuesta inesperada). Puedes probar directamente la Wayback Machine." },
+    pt: { invalid: "Nome de perfil inválido. Use de 1 a 15 letras, dígitos ou _ (ex. @nome).", error: "Não foi possível consultar o archive.org (rede indisponível ou resposta inesperada). Podes tentar diretamente a Wayback Machine." },
+    de: { invalid: "Ungültiger Profilname. Verwende 1–15 Buchstaben, Ziffern oder _ (z. B. @name).", error: "archive.org konnte nicht abgefragt werden (Netzwerk nicht verfügbar oder unerwartete Antwort). Du kannst die Wayback Machine direkt versuchen." }
+  };
+
+  // Returns a valid X handle ([A-Za-z0-9_]{1,15}) or "" if input is empty/invalid.
+  function extractHandle(raw) {
+    var s = (raw || "").trim();
+    if (!s) return "";
+    if (/^(https?:\/\/)?((www|mobile)\.)?(x|twitter)\.com\//i.test(s) || /^https?:\/\//i.test(s)) {
+      try {
+        var u = new URL(/^https?:\/\//i.test(s) ? s : "https://" + s);
+        var parts = u.pathname.split("/").filter(Boolean);
+        s = parts[0] || "";
+      } catch (e) { return ""; }
+    }
+    s = s.replace(/^@/, "");
+    s = s.split(/[\/?#]/)[0].trim();
+    return /^[A-Za-z0-9_]{1,15}$/.test(s) ? s : "";
+  }
+
+  // Accept only https snapshots hosted on web.archive.org (API may return http:// URLs).
+  function safeSnapshotUrl(raw) {
+    try {
+      var u = new URL(String(raw));
+      if (u.protocol === "http:") u.protocol = "https:";
+      if (u.protocol !== "https:" || u.hostname !== "web.archive.org" || u.port || u.username || u.password) return "";
+      if (u.pathname.indexOf("/web/") !== 0) return "";
+      return u.href;
+    } catch (e) { return ""; }
+  }
+
+  function makeLink(href, text) {
+    var a = document.createElement("a");
+    a.href = href;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = text;
+    return a;
+  }
+
+  function formatSnapDate(ts, lang) {
+    var t = STRINGS[lang];
+    if (!ts || ts.length < 8) return t.archive.unknownDate;
+    var y = ts.slice(0, 4), m = ts.slice(4, 6), d = ts.slice(6, 8);
+    var mi = parseInt(m, 10) - 1;
+    var months = t.archive.months;
+    return d + " " + (months[mi] || m) + " " + y;
+  }
+
+  function applyHandleLinks() {
+    var t = STRINGS[state.lang];
+    var h = state.handle;
+    var encHandle = encodeURIComponent(h);
+
+    linkX.href = "https://x.com/" + encHandle;
+    linkX.textContent = t.direct.openX(h);
+    linkTwitter.href = "https://twitter.com/" + encHandle;
+    linkTwitter.textContent = t.direct.openTwitter(h);
+
+    var q = encodeURIComponent('site:x.com OR site:twitter.com "' + h + '"');
+    linkGoogle.href = "https://www.google.com/search?q=" + q;
+    linkBing.href = "https://www.bing.com/search?q=" + q;
+
+    nitterHandlePreview.textContent = h;
+  }
+
+  function renderArchiveStatus() {
+    var t = STRINGS[state.lang];
+    var x = EXTRA[state.lang];
+
+    if (state.archiveStatus === "idle") return;
+
+    archiveActions.textContent = "";
+
+    if (state.archiveStatus === "checking") {
+      archiveDot.className = "dot dot--amber";
+      archiveDesc.textContent = t.archive.checking;
+      archiveSweep.hidden = false;
+      archiveFrameWrap.hidden = true;
+      frameCaption.hidden = true;
+      return;
+    }
+
+    archiveSweep.hidden = true;
+    frameCaption.textContent = t.archive.frameCaption;
+    var safeUrl = state.archiveStatus === "found" && state.archiveSnap ? safeSnapshotUrl(state.archiveSnap.url) : "";
+
+    if (safeUrl) {
+      var when = formatSnapDate(String(state.archiveSnap.timestamp || ""), state.lang);
+      archiveDot.className = "dot dot--green";
+      archiveDesc.textContent = t.archive.found(when);
+      archiveFrameWrap.hidden = false;
+      frameCaption.hidden = false;
+      if (archiveFrame.getAttribute("src") !== safeUrl) archiveFrame.src = safeUrl;
+      archiveActions.appendChild(makeLink(safeUrl, t.archive.openWayback));
+    } else {
+      archiveFrameWrap.hidden = true;
+      frameCaption.hidden = true;
+      archiveFrame.removeAttribute("src");
+      var saveUrl = "https://web.archive.org/save/https://x.com/" + encodeURIComponent(state.handle);
+      if (state.archiveStatus === "error") {
+        archiveDot.className = "dot dot--red";
+        archiveDesc.textContent = x.error;
+        archiveActions.appendChild(makeLink("https://web.archive.org/web/2/https://x.com/" + encodeURIComponent(state.handle), t.archive.openWayback));
+      } else {
+        archiveDot.className = "dot dot--red";
+        archiveDesc.textContent = t.archive.notFound;
+        archiveActions.appendChild(makeLink(saveUrl, t.archive.requestNew));
+      }
+    }
+  }
+
+  var TIMEOUT_MS = 8000;
+  var archiveCtl = null;
+
+  async function checkArchive(handle) {
+    // Cancel any in-flight lookup so a stale answer can never overwrite a newer one.
+    if (archiveCtl) archiveCtl.abort();
+    var ctl = new AbortController();
+    archiveCtl = ctl;
+    var timer = setTimeout(function () { ctl.abort(); }, TIMEOUT_MS);
+
+    state.archiveStatus = "checking";
+    state.archiveSnap = null;
+    renderArchiveStatus();
+
+    var targets = ["https://x.com/" + handle, "https://twitter.com/" + handle];
+    var found = null, failures = 0;
+
+    for (var i = 0; i < targets.length; i++) {
+      try {
+        var res = await fetch("https://archive.org/wayback/available?url=" + encodeURIComponent(targets[i]),
+          { signal: ctl.signal, credentials: "omit", referrerPolicy: "no-referrer" });
+        if (!res.ok) { failures++; continue; }
+        var data = await res.json();
+        var snap = data && data.archived_snapshots && data.archived_snapshots.closest;
+        if (snap && snap.available && snap.url && safeSnapshotUrl(snap.url)) { found = snap; break; }
+      } catch (e) {
+        if (ctl.signal.aborted && archiveCtl !== ctl) { clearTimeout(timer); return; } // superseded
+        failures++;
+        if (ctl.signal.aborted) break; // timeout
+      }
+    }
+    clearTimeout(timer);
+    if (archiveCtl !== ctl) return;
+
+    state.archiveStatus = found ? "found" : (failures >= targets.length || (failures && !found) ? "error" : "notfound");
+    state.archiveSnap = found;
+    renderArchiveStatus();
+  }
+
+  function render() {
+    var t = STRINGS[state.lang];
+    document.documentElement.lang = state.lang;
+    document.title = t.title;
+
+    txtEyebrow.textContent = t.eyebrow;
+    txtH1Prep.textContent = t.h1Prep;
+    txtH1Noun.textContent = t.h1Noun;
+    txtLede.textContent = t.lede;
+    txtInputLabel.textContent = t.inputLabel;
+    input.placeholder = t.placeholder;
+    txtScanBtn.textContent = t.scanBtn;
+
+    txtDirectH2.textContent = t.direct.h2;
+    txtDirectTag.textContent = t.direct.tag;
+    txtDirectDesc.textContent = t.direct.desc;
+    txtDirectHint.textContent = t.direct.hint;
+
+    txtArchiveH2.textContent = t.archive.h2;
+    txtArchiveTag.textContent = t.archive.tag;
+    archiveFrame.title = t.archive.frameTitle;
+
+    txtIndexH2.textContent = t.index.h2;
+    txtIndexTag.textContent = t.index.tag;
+    txtIndexDesc.textContent = t.index.desc;
+    linkGoogle.textContent = t.index.google;
+    linkBing.textContent = t.index.bing;
+
+    txtNitterH2.textContent = t.nitter.h2;
+    txtNitterTag.textContent = t.nitter.tag;
+    txtNitterDesc.textContent = t.nitter.desc;
+    txtNitterLink.textContent = t.nitter.link;
+    txtNitterHintPrefix.textContent = t.nitter.hintPrefix;
+    txtNitterHintDomain.textContent = t.nitter.hintDomain;
+
+    txtWhySummary.textContent = t.why.summary;
+    txtWhyP1.textContent = t.why.p1;
+    txtWhyP2.textContent = t.why.p2;
+
+    txtFooter.textContent = t.footer;
+
+    if (state.handle) applyHandleLinks();
+    renderArchiveStatus();
+
+    var btns = langbar.querySelectorAll(".langbtn");
+    for (var i = 0; i < btns.length; i++) {
+      var pressed = btns[i].getAttribute("data-lang") === state.lang;
+      btns[i].setAttribute("aria-pressed", pressed ? "true" : "false");
+    }
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var handle = extractHandle(input.value);
+    var errEl = document.getElementById("handleError");
+    if (!handle) {
+      input.setAttribute("aria-invalid", "true");
+      errEl.className = "errmsg";
+      errEl.textContent = input.value.trim() ? EXTRA[state.lang].invalid : "";
+      input.focus();
+      return;
+    }
+    input.removeAttribute("aria-invalid");
+    errEl.className = "visually-hidden";
+    errEl.textContent = "";
+    state.handle = handle;
+    applyHandleLinks();
+    channels.hidden = false;
+    checkArchive(handle);
+  });
+
+  langbar.addEventListener("click", function (e) {
+    var btn = e.target.closest(".langbtn");
+    if (!btn) return;
+    var lang = btn.getAttribute("data-lang");
+    if (SUPPORTED.indexOf(lang) === -1) return;
+    state.lang = lang;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

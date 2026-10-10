@@ -1,0 +1,58 @@
+# X fără cont
+
+Set de unelte pentru vizualizarea profilurilor publice de pe X (ex-Twitter) fără cont, în 7 limbi, într-un singur fișier HTML.
+
+**Live:** https://chiuta.github.io/X-fara-cont/
+
+![Captura de ecran](screenshot.png)
+
+## Ce este
+
+Introduci un nume de profil sau un link; aplicația generează patru „canale” de acces, toate fără cont și fără garanții: link direct, arhivă Wayback Machine, index de căutare (Google/Bing) și trimitere către instanțe Nitter. Nu este un scraper: nu citește conținutul X (browserul blochează asta prin CORS), ci doar construiește linkuri și verifică disponibilitatea unui instantaneu la archive.org.
+
+## Funcții
+
+- Interfață în 7 limbi: RO, EN, FR, IT, ES, PT, DE (limba browserului este detectată automat, altfel RO; se poate schimba din butoane).
+- Acceptă `@nume`, `nume` sau un link de profil x.com / twitter.com; numele este validat (1–15 litere, cifre sau `_`).
+- Canal 1 — linkuri directe către x.com și twitter.com.
+- Canal 2 — interoghează API-ul `archive.org/wayback/available` (x.com, apoi twitter.com) și, dacă găsește un instantaneu, îl afișează într-un cadru izolat (sandbox) și oferă link către Wayback Machine; altfel oferă „Cere un instantaneu nou”. Interogarea are timeout de 8 secunde, iar o nouă scanare o anulează pe cea anterioară.
+- Canal 3 — căutări Google și Bing pentru `site:x.com OR site:twitter.com "nume"` (se deschid doar la click).
+- Canal 4 — link către lista de instanțe Nitter (GitHub) și tiparul de adresă.
+
+## Manual de utilizare
+
+1. Alege limba din butoanele de sus (opțional).
+2. Scrie numele profilului sau lipește linkul și apasă „Scanează”.
+3. Folosește linkurile din fiecare canal; la „Arhivă Wayback” așteaptă rezultatul verificării.
+4. Dacă nu există arhivă, poți cere una nouă prin linkul oferit (se deschide pe web.archive.org).
+
+## Confidențialitate și rețea
+
+- Stocare locală: nu folosește `localStorage`, `sessionStorage`, IndexedDB sau cookie-uri.
+- Fără telemetrie, fără conturi, fără scripturi sau fonturi externe. Politica CSP din pagină permite conexiuni doar către archive.org.
+- La „Scanează”, **numele profilului este trimis către archive.org**: până la 2 interogări (una pentru x.com, una pentru twitter.com, a doua doar dacă prima nu găsește nimic). Dacă există instantaneu, cadrul încarcă o pagină de pe web.archive.org (încă un contact cu archive.org; adresa ta IP este vizibilă pentru ei). Nu se trimite referrer.
+- Linkurile către x.com, twitter.com, google.com, bing.com, github.com (Nitter) și web.archive.org (salvare) se deschid doar dacă le apeși.
+- Nu cere permisiuni de browser.
+
+## Limite și avertismente
+
+- Nicio cale nu e garantată: X poate cere autentificare oricând, arhivele pot lipsi sau pot fi vechi, instanțele Nitter sunt instabile.
+- Afirmațiile din interfață despre starea X/Nitter în 2026 (de exemplu „X a închis aproape orice altă cale”) sunt observații ale autorului, neverificate independent în acest repository.
+- Arhiva poate conține conținut al unor terți; cadrul este izolat, dar tratează-l ca pe orice pagină externă.
+- Aplicația nu este afiliată cu X Corp., Internet Archive, Google, Microsoft sau proiectul Nitter.
+
+## Rulare locală / offline
+
+Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
+
+## Licență
+
+Licența nu este încă declarată.
+
+## Autor
+
+Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
+
+## English summary
+
+X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. Licence not yet declared.
