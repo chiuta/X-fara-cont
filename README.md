@@ -4,6 +4,8 @@ Set de unelte pentru vizualizarea profilurilor publice de pe X (ex-Twitter) făr
 
 **Live:** https://chiuta.github.io/X-fara-cont/
 
+**Ultima actualizare:** 11 octombrie 2026
+
 ![Captura de ecran](screenshot.png)
 
 ## Ce este
@@ -37,13 +39,21 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 ## Limite și avertismente
 
 - Nicio cale nu e garantată: X poate cere autentificare oricând, arhivele pot lipsi sau pot fi vechi, instanțele Nitter sunt instabile.
-- Afirmațiile din interfață despre starea X/Nitter în 2026 (de exemplu „X a închis aproape orice altă cale”) sunt observații ale autorului, neverificate independent în acest repository.
+- Afirmațiile din interfață despre starea X/Nitter în 2026 (de exemplu „X a închis aproape orice altă cale”) sunt observații ale autorului. Starea Nitter/XCancel a fost verificată la 11.10.2026 (vezi Istoric); ea se poate schimba oricând.
 - Arhiva poate conține conținut al unor terți; cadrul este izolat, dar tratează-l ca pe orice pagină externă.
 - Aplicația nu este afiliată cu X Corp., Internet Archive, Google, Microsoft sau proiectul Nitter.
 
 ## Rulare locală / offline
 
 Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
+
+## Istoric / Changelog
+
+### 11 octombrie 2026
+- Cardul „Oglinzi Nitter” (în toate cele 7 limbi) arată acum situația la 11.10.2026: notificare de încetare de la X în august 2026, reluarea anunțată de proiectul Nitter, XCancel revenit online, nitter.net oficial încă nefuncțional.
+- Axe: 0 violări, fără depășire orizontală la 360 px.
+
+Surse verificate la 11.10.2026: privacyguides.org (7 sept. 2026, „Alternate X.com frontend Nitter announces it will continue despite the cease and desist”), cybernews.com, alternativeto.net (sept. 2026).
 
 ## Licență
 
