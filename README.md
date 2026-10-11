@@ -15,7 +15,9 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 ## Funcții
 
 - Interfață în 7 limbi: RO, EN, FR, IT, ES, PT, DE (limba browserului este detectată automat, altfel RO; se poate schimba din butoane).
-- Acceptă `@nume`, `nume` sau un link de profil x.com / twitter.com; numele este validat (1–15 litere, cifre sau `_`).
+- Acceptă `@nume`, `nume`, un link de profil sau un link de postare x.com / twitter.com (`…/nume/status/123…`); numele este validat (1–15 litere, cifre sau `_`), iar numele de secțiuni ale site-ului (`home`, `explore`, `i`, `search` etc.) sunt respinse. Pentru o postare, linkurile directe, interogarea Wayback, căutarea Google/Bing și linkul „Cere un instantaneu nou” vizează adresa exactă a postării.
+- Linkul „Toate capturile arhivate” către lista completă de capturi din Wayback Machine (în toate stările canalului de arhivă).
+- Rând de ajutor deasupra câmpului cu formatele acceptate; tasta `/` mută focusul în câmp.
 - Canal 1 — linkuri directe către x.com și twitter.com.
 - Canal 2 — interoghează API-ul `archive.org/wayback/available` (x.com, apoi twitter.com) și, dacă găsește un instantaneu, îl afișează într-un cadru izolat (sandbox) și oferă link către Wayback Machine; altfel oferă „Cere un instantaneu nou”. Interogarea are timeout de 8 secunde, iar o nouă scanare o anulează pe cea anterioară.
 - Canal 3 — căutări Google și Bing pentru `site:x.com OR site:twitter.com "nume"` (se deschid doar la click).
@@ -49,6 +51,12 @@ Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcțio
 
 ## Istoric / Changelog
 
+### 11 octombrie 2026 (a doua intrare)
+- Suport pentru linkuri de postare (`/status/<număr>`): instantaneu Wayback, căutare și linkuri pentru adresa exactă a postării.
+- Respinse numele rezervate de site (`home`, `explore`, `i`…) care erau acceptate ca nume de profil; link „Toate capturile arhivate”; rând de ajutor și scurtătura `/` (traduse în 7 limbi).
+- Politica CSP: `script-src` cu hash în loc de `'unsafe-inline'`.
+- Captura de ecran actualizată (rândul de ajutor).
+
 ### 11 octombrie 2026
 - Cardul „Oglinzi Nitter” (în toate cele 7 limbi) arată acum situația la 11.10.2026: notificare de încetare de la X în august 2026, reluarea anunțată de proiectul Nitter, XCancel revenit online, nitter.net oficial încă nefuncțional.
 - Axe: 0 violări, fără depășire orizontală la 360 px.
@@ -65,4 +73,4 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. Licence not yet declared.
+X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. Licence not yet declared.

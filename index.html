@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JCEZe5mm+Ku1JaV1E7NoF3UU0oDtzWo3bZGD6wNI0ZM='; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 7 limbi, un singur fișier HTML, fără telemetrie.">
 <meta property="og:title" content="X fără cont — post de ascultare">
@@ -102,6 +102,7 @@
     max-width: 54ch;
   }
 
+  .inputhint { font-size: 0.8rem; color: var(--text-muted); margin: 0 0 12px; }
   .tuner { display: flex; gap: 10px; margin-bottom: 36px; }
 
   .tuner input {
@@ -283,6 +284,7 @@
       <p class="lede" id="txtLede"></p>
     </header>
 
+    <p class="inputhint" id="txtInputHint"></p>
     <form class="tuner" id="tunerForm">
       <label for="handleInput" class="visually-hidden" id="txtInputLabel"></label>
       <input type="text" id="handleInput" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="200" aria-describedby="handleError">
@@ -744,7 +746,7 @@
     return "ro";
   }
 
-  var state = { lang: detectLang(), handle: "", archiveStatus: "idle", archiveSnap: null };
+  var state = { lang: detectLang(), handle: "", status: "", archiveStatus: "idle", archiveSnap: null };
 
   var langbar = document.getElementById("langbar");
   var form = document.getElementById("tunerForm");
@@ -793,32 +795,40 @@
   var txtWhyP1 = document.getElementById("txtWhyP1");
   var txtWhyP2 = document.getElementById("txtWhyP2");
   var txtFooter = document.getElementById("txtFooter");
+  var txtInputHint = document.getElementById("txtInputHint");
 
   var EXTRA = {
-    ro: { invalid: "Nume de profil invalid. Folosește 1–15 litere, cifre sau _ (ex. @nume).", error: "Nu am putut interoga archive.org (rețea indisponibilă sau răspuns neașteptat). Poți încerca direct în Wayback Machine." },
-    en: { invalid: "Invalid profile name. Use 1–15 letters, digits or _ (e.g. @name).", error: "Could not query archive.org (network unavailable or unexpected reply). You can try the Wayback Machine directly." },
-    fr: { invalid: "Nom de profil invalide. Utilisez 1 à 15 lettres, chiffres ou _ (ex. @nom).", error: "Impossible d'interroger archive.org (réseau indisponible ou réponse inattendue). Vous pouvez essayer directement la Wayback Machine." },
-    it: { invalid: "Nome profilo non valido. Usa da 1 a 15 lettere, cifre o _ (es. @nome).", error: "Impossibile interrogare archive.org (rete non disponibile o risposta inattesa). Puoi provare direttamente la Wayback Machine." },
-    es: { invalid: "Nombre de perfil no válido. Usa de 1 a 15 letras, cifras o _ (p. ej. @nombre).", error: "No se pudo consultar archive.org (red no disponible o respuesta inesperada). Puedes probar directamente la Wayback Machine." },
-    pt: { invalid: "Nome de perfil inválido. Use de 1 a 15 letras, dígitos ou _ (ex. @nome).", error: "Não foi possível consultar o archive.org (rede indisponível ou resposta inesperada). Podes tentar diretamente a Wayback Machine." },
-    de: { invalid: "Ungültiger Profilname. Verwende 1–15 Buchstaben, Ziffern oder _ (z. B. @name).", error: "archive.org konnte nicht abgefragt werden (Netzwerk nicht verfügbar oder unerwartete Antwort). Du kannst die Wayback Machine direkt versuchen." }
+    ro: { inputHint: "Acceptă: @nume, nume, link de profil sau link de postare (x.com/nume/status/123…). Apasă / pentru a ajunge aici.", allCaptures: "Toate capturile arhivate →", notFoundPost: "Nicio arhivă găsită pentru această postare. Poți cere una chiar tu, mai jos.", invalid: "Nume de profil invalid. Folosește 1–15 litere, cifre sau _ (ex. @nume).", error: "Nu am putut interoga archive.org (rețea indisponibilă sau răspuns neașteptat). Poți încerca direct în Wayback Machine." },
+    en: { inputHint: "Accepts: @name, name, a profile link or a post link (x.com/name/status/123…). Press / to jump here.", allCaptures: "All archived captures →", notFoundPost: "No archive found for this post. You can request one yourself, below.", invalid: "Invalid profile name. Use 1–15 letters, digits or _ (e.g. @name).", error: "Could not query archive.org (network unavailable or unexpected reply). You can try the Wayback Machine directly." },
+    fr: { inputHint: "Accepté : @nom, nom, lien de profil ou lien de publication (x.com/nom/status/123…). Appuyez sur / pour venir ici.", allCaptures: "Toutes les captures archivées →", notFoundPost: "Aucune archive trouvée pour cette publication. Vous pouvez en demander une vous-même, ci-dessous.", invalid: "Nom de profil invalide. Utilisez 1 à 15 lettres, chiffres ou _ (ex. @nom).", error: "Impossible d'interroger archive.org (réseau indisponible ou réponse inattendue). Vous pouvez essayer directement la Wayback Machine." },
+    it: { inputHint: "Accettati: @nome, nome, link del profilo o link di un post (x.com/nome/status/123…). Premi / per arrivare qui.", allCaptures: "Tutte le copie archiviate →", notFoundPost: "Nessun archivio trovato per questo post. Puoi richiederne uno tu stesso, qui sotto.", invalid: "Nome profilo non valido. Usa da 1 a 15 lettere, cifre o _ (es. @nome).", error: "Impossibile interrogare archive.org (rete non disponibile o risposta inattesa). Puoi provare direttamente la Wayback Machine." },
+    es: { inputHint: "Se acepta: @nombre, nombre, enlace de perfil o enlace de publicación (x.com/nombre/status/123…). Pulsa / para venir aquí.", allCaptures: "Todas las capturas archivadas →", notFoundPost: "No se encontró ningún archivo de esta publicación. Puedes solicitar uno tú mismo, abajo.", invalid: "Nombre de perfil no válido. Usa de 1 a 15 letras, cifras o _ (p. ej. @nombre).", error: "No se pudo consultar archive.org (red no disponible o respuesta inesperada). Puedes probar directamente la Wayback Machine." },
+    pt: { inputHint: "Aceita: @nome, nome, ligação de perfil ou ligação de publicação (x.com/nome/status/123…). Prime / para vir aqui.", allCaptures: "Todas as capturas arquivadas →", notFoundPost: "Nenhum arquivo encontrado para esta publicação. Podes pedir um tu mesmo, abaixo.", invalid: "Nome de perfil inválido. Use de 1 a 15 letras, dígitos ou _ (ex. @nome).", error: "Não foi possível consultar o archive.org (rede indisponível ou resposta inesperada). Podes tentar diretamente a Wayback Machine." },
+    de: { inputHint: "Akzeptiert: @name, name, Profil-Link oder Post-Link (x.com/name/status/123…). Mit / springst du hierher.", allCaptures: "Alle archivierten Schnappschüsse →", notFoundPost: "Kein Archiv für diesen Beitrag gefunden. Du kannst unten selbst eines anfordern.", invalid: "Ungültiger Profilname. Verwende 1–15 Buchstaben, Ziffern oder _ (z. B. @name).", error: "archive.org konnte nicht abgefragt werden (Netzwerk nicht verfügbar oder unerwartete Antwort). Du kannst die Wayback Machine direkt versuchen." }
   };
 
-  // Returns a valid X handle ([A-Za-z0-9_]{1,15}) or "" if input is empty/invalid.
-  function extractHandle(raw) {
+  // Names that are X site sections, not profiles.
+  var RESERVED = /^(i|home|explore|search|hashtag|notifications|messages|settings|login|logout|signup|intent|share|compose|tos|privacy|about|download|jobs|account|oauth|en|ro|fr|it|es|pt|de)$/i;
+
+  // Returns {handle, status} (handle = [A-Za-z0-9_]{1,15}; status = digits or "") or null if invalid.
+  function extractTarget(raw) {
     var s = (raw || "").trim();
-    if (!s) return "";
+    if (!s) return null;
+    var status = "";
     if (/^(https?:\/\/)?((www|mobile)\.)?(x|twitter)\.com\//i.test(s) || /^https?:\/\//i.test(s)) {
       try {
         var u = new URL(/^https?:\/\//i.test(s) ? s : "https://" + s);
         var parts = u.pathname.split("/").filter(Boolean);
         s = parts[0] || "";
-      } catch (e) { return ""; }
+        if ((parts[1] === "status" || parts[1] === "statuses") && /^\d{1,25}$/.test(parts[2] || "")) status = parts[2];
+      } catch (e) { return null; }
     }
     s = s.replace(/^@/, "");
     s = s.split(/[\/?#]/)[0].trim();
-    return /^[A-Za-z0-9_]{1,15}$/.test(s) ? s : "";
+    if (!/^[A-Za-z0-9_]{1,15}$/.test(s) || RESERVED.test(s)) return null;
+    return { handle: s, status: status };
   }
+  function extractHandle(raw) { var r = extractTarget(raw); return r ? r.handle : ""; }
 
   // Accept only https snapshots hosted on web.archive.org (API may return http:// URLs).
   function safeSnapshotUrl(raw) {
@@ -853,18 +863,27 @@
     var t = STRINGS[state.lang];
     var h = state.handle;
     var encHandle = encodeURIComponent(h);
+    var pathText = h + (state.status ? "/status/" + state.status : "");
+    var path = encHandle + (state.status ? "/status/" + state.status : "");
 
-    linkX.href = "https://x.com/" + encHandle;
-    linkX.textContent = t.direct.openX(h);
-    linkTwitter.href = "https://twitter.com/" + encHandle;
-    linkTwitter.textContent = t.direct.openTwitter(h);
+    linkX.href = "https://x.com/" + path;
+    linkX.textContent = t.direct.openX(pathText);
+    linkTwitter.href = "https://twitter.com/" + path;
+    linkTwitter.textContent = t.direct.openTwitter(pathText);
 
-    var q = encodeURIComponent('site:x.com OR site:twitter.com "' + h + '"');
+    var q = encodeURIComponent(state.status
+      ? 'site:x.com/' + h + '/status/' + state.status + ' OR site:twitter.com/' + h + '/status/' + state.status
+      : 'site:x.com OR site:twitter.com "' + h + '"');
     linkGoogle.href = "https://www.google.com/search?q=" + q;
     linkBing.href = "https://www.bing.com/search?q=" + q;
 
-    nitterHandlePreview.textContent = h;
+    nitterHandlePreview.textContent = pathText;
   }
+
+  function targetUrl(host) {
+    return "https://" + host + "/" + encodeURIComponent(state.handle) + (state.status ? "/status/" + state.status : "");
+  }
+  function allCapturesUrl() { return "https://web.archive.org/web/*/" + targetUrl("x.com"); }
 
   function renderArchiveStatus() {
     var t = STRINGS[state.lang];
@@ -895,27 +914,29 @@
       frameCaption.hidden = false;
       if (archiveFrame.getAttribute("src") !== safeUrl) archiveFrame.src = safeUrl;
       archiveActions.appendChild(makeLink(safeUrl, t.archive.openWayback));
+      archiveActions.appendChild(makeLink(allCapturesUrl(), x.allCaptures));
     } else {
       archiveFrameWrap.hidden = true;
       frameCaption.hidden = true;
       archiveFrame.removeAttribute("src");
-      var saveUrl = "https://web.archive.org/save/https://x.com/" + encodeURIComponent(state.handle);
+      var saveUrl = "https://web.archive.org/save/" + targetUrl("x.com");
       if (state.archiveStatus === "error") {
         archiveDot.className = "dot dot--red";
         archiveDesc.textContent = x.error;
-        archiveActions.appendChild(makeLink("https://web.archive.org/web/2/https://x.com/" + encodeURIComponent(state.handle), t.archive.openWayback));
+        archiveActions.appendChild(makeLink("https://web.archive.org/web/2/" + targetUrl("x.com"), t.archive.openWayback));
       } else {
         archiveDot.className = "dot dot--red";
-        archiveDesc.textContent = t.archive.notFound;
+        archiveDesc.textContent = state.status ? x.notFoundPost : t.archive.notFound;
         archiveActions.appendChild(makeLink(saveUrl, t.archive.requestNew));
       }
+      archiveActions.appendChild(makeLink(allCapturesUrl(), x.allCaptures));
     }
   }
 
   var TIMEOUT_MS = 8000;
   var archiveCtl = null;
 
-  async function checkArchive(handle) {
+  async function checkArchive(handle, status) {
     // Cancel any in-flight lookup so a stale answer can never overwrite a newer one.
     if (archiveCtl) archiveCtl.abort();
     var ctl = new AbortController();
@@ -926,7 +947,8 @@
     state.archiveSnap = null;
     renderArchiveStatus();
 
-    var targets = ["https://x.com/" + handle, "https://twitter.com/" + handle];
+    var suffix = status ? "/status/" + status : "";
+    var targets = ["https://x.com/" + handle + suffix, "https://twitter.com/" + handle + suffix];
     var found = null, failures = 0;
 
     for (var i = 0; i < targets.length; i++) {
@@ -991,6 +1013,7 @@
     txtWhyP2.textContent = t.why.p2;
 
     txtFooter.textContent = t.footer;
+    txtInputHint.textContent = EXTRA[state.lang].inputHint;
 
     if (state.handle) applyHandleLinks();
     renderArchiveStatus();
@@ -1004,7 +1027,8 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var handle = extractHandle(input.value);
+    var tgt = extractTarget(input.value);
+    var handle = tgt ? tgt.handle : "";
     var errEl = document.getElementById("handleError");
     if (!handle) {
       input.setAttribute("aria-invalid", "true");
@@ -1017,9 +1041,10 @@
     errEl.className = "visually-hidden";
     errEl.textContent = "";
     state.handle = handle;
+    state.status = tgt.status;
     applyHandleLinks();
     channels.hidden = false;
-    checkArchive(handle);
+    checkArchive(handle, tgt.status);
   });
 
   langbar.addEventListener("click", function (e) {
@@ -1029,6 +1054,14 @@
     if (SUPPORTED.indexOf(lang) === -1) return;
     state.lang = lang;
     render();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "/" || e.ctrlKey || e.metaKey || e.altKey) return;
+    var tg = e.target && e.target.tagName;
+    if (tg === "INPUT" || tg === "TEXTAREA" || tg === "SELECT") return;
+    e.preventDefault();
+    input.focus();
   });
 
   render();
