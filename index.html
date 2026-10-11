@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-JCEZe5mm+Ku1JaV1E7NoF3UU0oDtzWo3bZGD6wNI0ZM='; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-xOurTap5DSb50fcX2wdxKIlbBDEGF+EdiSu42Fl4e5g='; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 7 limbi, un singur fișier HTML, fără telemetrie.">
 <meta property="og:title" content="X fără cont — post de ascultare">
@@ -262,6 +262,12 @@
   @media (prefers-reduced-motion: reduce) {
     .sweep span { animation: none; left: 0; width: 100%; opacity: 0.4; }
   }
+
+  /* r7: fără depășire orizontală cu nume/linkuri lungi */
+  .channel, .channel__actions a { min-width: 0; }
+  .channel__actions a, .channel__hint code, .channel__desc { overflow-wrap: anywhere; }
+  .channel__actions { max-width: 100%; }
+  #postDate { font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
@@ -306,6 +312,7 @@
           <a id="linkTwitter" target="_blank" rel="noopener noreferrer"></a>
         </div>
         <p class="channel__hint" id="txtDirectHint"></p>
+        <p class="channel__hint" id="postDate" hidden></p>
       </article>
 
       <article class="channel">
@@ -798,13 +805,13 @@
   var txtInputHint = document.getElementById("txtInputHint");
 
   var EXTRA = {
-    ro: { inputHint: "Acceptă: @nume, nume, link de profil sau link de postare (x.com/nume/status/123…). Apasă / pentru a ajunge aici.", allCaptures: "Toate capturile arhivate →", notFoundPost: "Nicio arhivă găsită pentru această postare. Poți cere una chiar tu, mai jos.", invalid: "Nume de profil invalid. Folosește 1–15 litere, cifre sau _ (ex. @nume).", error: "Nu am putut interoga archive.org (rețea indisponibilă sau răspuns neașteptat). Poți încerca direct în Wayback Machine." },
-    en: { inputHint: "Accepts: @name, name, a profile link or a post link (x.com/name/status/123…). Press / to jump here.", allCaptures: "All archived captures →", notFoundPost: "No archive found for this post. You can request one yourself, below.", invalid: "Invalid profile name. Use 1–15 letters, digits or _ (e.g. @name).", error: "Could not query archive.org (network unavailable or unexpected reply). You can try the Wayback Machine directly." },
-    fr: { inputHint: "Accepté : @nom, nom, lien de profil ou lien de publication (x.com/nom/status/123…). Appuyez sur / pour venir ici.", allCaptures: "Toutes les captures archivées →", notFoundPost: "Aucune archive trouvée pour cette publication. Vous pouvez en demander une vous-même, ci-dessous.", invalid: "Nom de profil invalide. Utilisez 1 à 15 lettres, chiffres ou _ (ex. @nom).", error: "Impossible d'interroger archive.org (réseau indisponible ou réponse inattendue). Vous pouvez essayer directement la Wayback Machine." },
-    it: { inputHint: "Accettati: @nome, nome, link del profilo o link di un post (x.com/nome/status/123…). Premi / per arrivare qui.", allCaptures: "Tutte le copie archiviate →", notFoundPost: "Nessun archivio trovato per questo post. Puoi richiederne uno tu stesso, qui sotto.", invalid: "Nome profilo non valido. Usa da 1 a 15 lettere, cifre o _ (es. @nome).", error: "Impossibile interrogare archive.org (rete non disponibile o risposta inattesa). Puoi provare direttamente la Wayback Machine." },
-    es: { inputHint: "Se acepta: @nombre, nombre, enlace de perfil o enlace de publicación (x.com/nombre/status/123…). Pulsa / para venir aquí.", allCaptures: "Todas las capturas archivadas →", notFoundPost: "No se encontró ningún archivo de esta publicación. Puedes solicitar uno tú mismo, abajo.", invalid: "Nombre de perfil no válido. Usa de 1 a 15 letras, cifras o _ (p. ej. @nombre).", error: "No se pudo consultar archive.org (red no disponible o respuesta inesperada). Puedes probar directamente la Wayback Machine." },
-    pt: { inputHint: "Aceita: @nome, nome, ligação de perfil ou ligação de publicação (x.com/nome/status/123…). Prime / para vir aqui.", allCaptures: "Todas as capturas arquivadas →", notFoundPost: "Nenhum arquivo encontrado para esta publicação. Podes pedir um tu mesmo, abaixo.", invalid: "Nome de perfil inválido. Use de 1 a 15 letras, dígitos ou _ (ex. @nome).", error: "Não foi possível consultar o archive.org (rede indisponível ou resposta inesperada). Podes tentar diretamente a Wayback Machine." },
-    de: { inputHint: "Akzeptiert: @name, name, Profil-Link oder Post-Link (x.com/name/status/123…). Mit / springst du hierher.", allCaptures: "Alle archivierten Schnappschüsse →", notFoundPost: "Kein Archiv für diesen Beitrag gefunden. Du kannst unten selbst eines anfordern.", invalid: "Ungültiger Profilname. Verwende 1–15 Buchstaben, Ziffern oder _ (z. B. @name).", error: "archive.org konnte nicht abgefragt werden (Netzwerk nicht verfügbar oder unerwartete Antwort). Du kannst die Wayback Machine direkt versuchen." }
+    ro: { postDate: "Data postării (calculată din ID, UTC): ", inputHint: "Acceptă: @nume, nume, link de profil sau link de postare (x.com/nume/status/123…). Apasă / pentru a ajunge aici.", allCaptures: "Toate capturile arhivate →", notFoundPost: "Nicio arhivă găsită pentru această postare. Poți cere una chiar tu, mai jos.", invalid: "Nume de profil invalid. Folosește 1–15 litere, cifre sau _ (ex. @nume).", error: "Nu am putut interoga archive.org (rețea indisponibilă sau răspuns neașteptat). Poți încerca direct în Wayback Machine." },
+    en: { postDate: "Post date (computed from the ID, UTC): ", inputHint: "Accepts: @name, name, a profile link or a post link (x.com/name/status/123…). Press / to jump here.", allCaptures: "All archived captures →", notFoundPost: "No archive found for this post. You can request one yourself, below.", invalid: "Invalid profile name. Use 1–15 letters, digits or _ (e.g. @name).", error: "Could not query archive.org (network unavailable or unexpected reply). You can try the Wayback Machine directly." },
+    fr: { postDate: "Date de la publication (calculée à partir de l'ID, UTC) : ", inputHint: "Accepté : @nom, nom, lien de profil ou lien de publication (x.com/nom/status/123…). Appuyez sur / pour venir ici.", allCaptures: "Toutes les captures archivées →", notFoundPost: "Aucune archive trouvée pour cette publication. Vous pouvez en demander une vous-même, ci-dessous.", invalid: "Nom de profil invalide. Utilisez 1 à 15 lettres, chiffres ou _ (ex. @nom).", error: "Impossible d'interroger archive.org (réseau indisponible ou réponse inattendue). Vous pouvez essayer directement la Wayback Machine." },
+    it: { postDate: "Data del post (calcolata dall'ID, UTC): ", inputHint: "Accettati: @nome, nome, link del profilo o link di un post (x.com/nome/status/123…). Premi / per arrivare qui.", allCaptures: "Tutte le copie archiviate →", notFoundPost: "Nessun archivio trovato per questo post. Puoi richiederne uno tu stesso, qui sotto.", invalid: "Nome profilo non valido. Usa da 1 a 15 lettere, cifre o _ (es. @nome).", error: "Impossibile interrogare archive.org (rete non disponibile o risposta inattesa). Puoi provare direttamente la Wayback Machine." },
+    es: { postDate: "Fecha de la publicación (calculada desde el ID, UTC): ", inputHint: "Se acepta: @nombre, nombre, enlace de perfil o enlace de publicación (x.com/nombre/status/123…). Pulsa / para venir aquí.", allCaptures: "Todas las capturas archivadas →", notFoundPost: "No se encontró ningún archivo de esta publicación. Puedes solicitar uno tú mismo, abajo.", invalid: "Nombre de perfil no válido. Usa de 1 a 15 letras, cifras o _ (p. ej. @nombre).", error: "No se pudo consultar archive.org (red no disponible o respuesta inesperada). Puedes probar directamente la Wayback Machine." },
+    pt: { postDate: "Data da publicação (calculada a partir do ID, UTC): ", inputHint: "Aceita: @nome, nome, ligação de perfil ou ligação de publicação (x.com/nome/status/123…). Prime / para vir aqui.", allCaptures: "Todas as capturas arquivadas →", notFoundPost: "Nenhum arquivo encontrado para esta publicação. Podes pedir um tu mesmo, abaixo.", invalid: "Nome de perfil inválido. Use de 1 a 15 letras, dígitos ou _ (ex. @nome).", error: "Não foi possível consultar o archive.org (rede indisponível ou resposta inesperada). Podes tentar diretamente a Wayback Machine." },
+    de: { postDate: "Datum des Posts (aus der ID berechnet, UTC): ", inputHint: "Akzeptiert: @name, name, Profil-Link oder Post-Link (x.com/name/status/123…). Mit / springst du hierher.", allCaptures: "Alle archivierten Schnappschüsse →", notFoundPost: "Kein Archiv für diesen Beitrag gefunden. Du kannst unten selbst eines anfordern.", invalid: "Ungültiger Profilname. Verwende 1–15 Buchstaben, Ziffern oder _ (z. B. @name).", error: "archive.org konnte nicht abgefragt werden (Netzwerk nicht verfügbar oder unerwartete Antwort). Du kannst die Wayback Machine direkt versuchen." }
   };
 
   // Names that are X site sections, not profiles.
@@ -859,6 +866,18 @@
     return d + " " + (months[mi] || m) + " " + y;
   }
 
+  // ID-urile postărilor X sunt „snowflake”: primii biți = milisecunde de la 2010-11-04T01:42:54.657Z
+  function postDateFromId(id) {
+    try {
+      var big = BigInt(id);
+      if (big < 29700859247770624n) return ""; // ID-uri dinainte de noiembrie 2010 nu sunt snowflake
+      var ms = Number(big >> 22n) + 1288834974657;
+      var d = new Date(ms);
+      if (isNaN(d.getTime()) || ms < 1288834974657 || ms > Date.now() + 86400000) return "";
+      return d.toISOString().replace("T", " ").slice(0, 19) + " UTC";
+    } catch (e) { return ""; }
+  }
+
   function applyHandleLinks() {
     var t = STRINGS[state.lang];
     var h = state.handle;
@@ -878,6 +897,8 @@
     linkBing.href = "https://www.bing.com/search?q=" + q;
 
     nitterHandlePreview.textContent = pathText;
+    var pdEl = document.getElementById("postDate"), pdv = state.status ? postDateFromId(state.status) : "";
+    pdEl.hidden = !pdv; pdEl.textContent = pdv ? EXTRA[state.lang].postDate + pdv : "";
   }
 
   function targetUrl(host) {

@@ -16,6 +16,7 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 
 - Interfață în 7 limbi: RO, EN, FR, IT, ES, PT, DE (limba browserului este detectată automat, altfel RO; se poate schimba din butoane).
 - Acceptă `@nume`, `nume`, un link de profil sau un link de postare x.com / twitter.com (`…/nume/status/123…`); numele este validat (1–15 litere, cifre sau `_`), iar numele de secțiuni ale site-ului (`home`, `explore`, `i`, `search` etc.) sunt respinse. Pentru o postare, linkurile directe, interogarea Wayback, căutarea Google/Bing și linkul „Cere un instantaneu nou” vizează adresa exactă a postării.
+- Pentru linkuri de postare, afișează data creării postării (UTC), calculată local din ID (ID-urile „snowflake” conțin marca de timp; calculul se aplică doar ID-urilor de după noiembrie 2010). Ajută la alegerea instantaneului Wayback potrivit; nu se face nicio cerere de rețea.
 - Linkul „Toate capturile arhivate” către lista completă de capturi din Wayback Machine (în toate stările canalului de arhivă).
 - Rând de ajutor deasupra câmpului cu formatele acceptate; tasta `/` mută focusul în câmp.
 - Canal 1 — linkuri directe către x.com și twitter.com.
@@ -50,6 +51,10 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
 
 ## Istoric / Changelog
+
+### 11 octombrie 2026 (a treia intrare)
+- Corectată depășirea orizontală la 360 px (reprodusă cu un link de postare lung: scrollWidth 483 → 360); linkurile și tiparul Nitter se rup acum pe mai multe rânduri.
+- Data postării calculată din ID, în cele 7 limbi.
 
 ### 11 octombrie 2026 (a doua intrare)
 - Suport pentru linkuri de postare (`/status/<număr>`): instantaneu Wayback, căutare și linkuri pentru adresa exactă a postării.
