@@ -4,7 +4,7 @@ Set de unelte pentru vizualizarea profilurilor publice de pe X (ex-Twitter) făr
 
 **Live:** https://chiuta.github.io/X-fara-cont/
 
-**Ultima actualizare:** 11 octombrie 2026
+**Versiune:** 1.0.0 · **Ultima actualizare:** 12 octombrie 2026
 
 ![Captura de ecran](screenshot.png)
 
@@ -51,6 +51,9 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
 
 ## Istoric / Changelog
+
+### 12 octombrie 2026 (v1.0.0)
+- 1.0.0 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
 
 ### 11 octombrie 2026 (a treia intrare)
 - Corectată depășirea orizontală la 360 px (reprodusă cu un link de postare lung: scrollWidth 483 → 360); linkurile și tiparul Nitter se rup acum pe mai multe rânduri.

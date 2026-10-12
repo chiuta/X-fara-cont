@@ -10,8 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="application-version" content="1.0.0">
+<meta name="last-updated" content="2026-10-12">
 <meta name="color-scheme" content="dark">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-xOurTap5DSb50fcX2wdxKIlbBDEGF+EdiSu42Fl4e5g='; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-/ryINXhQTReRfZBbx5WDqYLnIHI2TX4cWiYz7NsF8d4='; style-src 'unsafe-inline'; connect-src https://archive.org https://web.archive.org; frame-src https://web.archive.org https://*.archive.org; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 7 limbi, un singur fișier HTML, fără telemetrie.">
 <meta property="og:title" content="X fără cont — post de ascultare">
@@ -365,6 +367,7 @@
     </details>
 
     <footer id="txtFooter"></footer>
+    <p style="margin:6px 0 0;font-size:0.78rem;color:var(--text-muted);text-align:center"><span id="txtVerLabel">Versiune</span> <span id="app-version">v 1.0.0 · 2026-10-12</span></p>
   </main>
 
 <script>
@@ -420,6 +423,7 @@
         p1: "Un scraper real ar citi răspunsul brut trimis de x.com direct din JavaScript, în pagina ta. Browserul blochează asta prin CORS: x.com nu trimite anteturile care ar lăsa un site străin să-i citească răspunsul. Chiar ocolind asta printr-un proxy, X cere acum autentificare la nivel de server pentru aproape tot conținutul — inclusiv pentru propriile widget-uri oficiale de embed, care de la un punct încolo afișează gol pentru vizitatorii fără cont. Nitter, alternativa clasică, a picat din același motiv.",
         p2: "Ce rămâne fiabil fără server propriu sunt exact canalele de mai sus. Pentru un flux live garantat, ar trebui un mic server propriu — de exemplu Nitter sau RSS-Bridge auto-găzduite, cu token-uri de cont proprii. Pot să te ajut separat cu asta, dacă vrei să mergi mai departe."
       },
+      verLabel: "Versiune",
       footer: "Fără telemetrie și fără cont. Linkurile se generează local. La „Scanează”, numele profilului este trimis către archive.org (până la două interogări, pentru x.com și twitter.com), iar instantaneul găsit se încarcă din web.archive.org. Google, Bing, X și Nitter se deschid doar dacă apeși pe link."
     },
 
@@ -473,6 +477,7 @@
         p1: "A real scraper would need to read the raw response x.com sends, directly from JavaScript running on your page. The browser blocks this through CORS: x.com doesn't send the headers that would let a foreign site read its response. Even routing around that with a proxy, X now requires server-side authentication for almost all content — including its own official embed widgets, which past a point show blank for visitors without an account. Nitter, the classic alternative, went down for the same reason.",
         p2: "What remains reliable without your own server are exactly the channels above. For a guaranteed live feed, you'd need a small server of your own — for example a self-hosted Nitter or RSS-Bridge instance, with your own account tokens. I can help you with that separately, if you want to go further."
       },
+      verLabel: "Version",
       footer: "No telemetry, no account. Links are generated locally. On “Scan”, the profile name is sent to archive.org (up to two queries, for x.com and twitter.com) and the snapshot found is loaded from web.archive.org. Google, Bing, X and Nitter open only if you click the link."
     },
 
@@ -526,6 +531,7 @@
         p1: "Un vrai scraper devrait lire la réponse brute envoyée par x.com directement depuis le JavaScript exécuté sur votre page. Le navigateur bloque cela via CORS : x.com n'envoie pas les en-têtes qui permettraient à un site tiers de lire sa réponse. Même en contournant cela avec un proxy, X exige désormais une authentification côté serveur pour presque tout le contenu — y compris pour ses propres widgets d'intégration officiels, qui au-delà d'un certain point s'affichent vides pour les visiteurs sans compte. Nitter, l'alternative classique, est tombé pour la même raison.",
         p2: "Ce qui reste fiable sans serveur personnel, ce sont exactement les canaux ci-dessus. Pour un flux en direct garanti, il faudrait un petit serveur personnel — par exemple une instance Nitter ou RSS-Bridge auto-hébergée, avec vos propres jetons de compte. Je peux vous aider séparément avec ça, si vous voulez aller plus loin."
       },
+      verLabel: "Version",
       footer: "Aucune télémétrie, aucun compte. Les liens sont générés localement. Avec « Scanner », le nom du profil est envoyé à archive.org (jusqu'à deux requêtes, pour x.com et twitter.com) et l'instantané trouvé est chargé depuis web.archive.org. Google, Bing, X et Nitter ne s'ouvrent que si vous cliquez sur le lien."
     },
 
@@ -579,6 +585,7 @@
         p1: "Uno scraper vero dovrebbe leggere la risposta grezza inviata da x.com direttamente dal JavaScript in esecuzione sulla tua pagina. Il browser blocca questo tramite CORS: x.com non invia le intestazioni che permetterebbero a un sito esterno di leggerne la risposta. Anche aggirando questo con un proxy, X ora richiede l'autenticazione lato server per quasi tutti i contenuti — inclusi i suoi stessi widget ufficiali di embed, che oltre un certo punto appaiono vuoti per i visitatori senza account. Nitter, l'alternativa classica, è caduto per lo stesso motivo.",
         p2: "Ciò che resta affidabile senza un server proprio sono esattamente i canali sopra. Per un flusso live garantito servirebbe un piccolo server proprio — per esempio un'istanza Nitter o RSS-Bridge autogestita, con i tuoi token d'account. Posso aiutarti separatamente con questo, se vuoi andare oltre."
       },
+      verLabel: "Versione",
       footer: "Nessuna telemetria, nessun account. I link sono generati localmente. Con «Scansiona», il nome del profilo viene inviato ad archive.org (fino a due richieste, per x.com e twitter.com) e lo snapshot trovato viene caricato da web.archive.org. Google, Bing, X e Nitter si aprono solo se clicchi sul link."
     },
 
@@ -632,6 +639,7 @@
         p1: "Un scraper real tendría que leer la respuesta en bruto que envía x.com directamente desde JavaScript ejecutado en tu página. El navegador bloquea esto mediante CORS: x.com no envía las cabeceras que permitirían a un sitio externo leer su respuesta. Incluso evitando esto con un proxy, X exige ahora autenticación a nivel de servidor para casi todo el contenido — incluidos sus propios widgets oficiales de inserción, que a partir de cierto punto se muestran vacíos para los visitantes sin cuenta. Nitter, la alternativa clásica, cayó por el mismo motivo.",
         p2: "Lo que sigue siendo fiable sin servidor propio son exactamente los canales de arriba. Para un flujo en vivo garantizado haría falta un pequeño servidor propio — por ejemplo una instancia de Nitter o RSS-Bridge autoalojada, con tus propios tokens de cuenta. Puedo ayudarte por separado con eso, si quieres ir más allá."
       },
+      verLabel: "Versión",
       footer: "Sin telemetría ni cuenta. Los enlaces se generan localmente. Con «Escanear», el nombre del perfil se envía a archive.org (hasta dos consultas, para x.com y twitter.com) y la captura encontrada se carga desde web.archive.org. Google, Bing, X y Nitter solo se abren si haces clic en el enlace."
     },
 
@@ -685,6 +693,7 @@
         p1: "Um scraper a sério teria de ler a resposta em bruto enviada pelo x.com diretamente a partir de JavaScript executado na tua página. O navegador bloqueia isto através de CORS: o x.com não envia os cabeçalhos que permitiriam a um site externo ler a sua resposta. Mesmo contornando isto com um proxy, o X exige agora autenticação do lado do servidor para quase todo o conteúdo — incluindo os seus próprios widgets oficiais de incorporação, que a partir de certo ponto aparecem vazios para visitantes sem conta. O Nitter, a alternativa clássica, caiu pelo mesmo motivo.",
         p2: "O que continua fiável sem servidor próprio são exatamente os canais acima. Para um fluxo em direto garantido, seria preciso um pequeno servidor próprio — por exemplo uma instância Nitter ou RSS-Bridge auto-hospedada, com os teus próprios tokens de conta. Posso ajudar-te separadamente com isso, se quiseres ir mais longe."
       },
+      verLabel: "Versão",
       footer: "Sem telemetria nem conta. Os links são gerados localmente. Em «Verificar», o nome do perfil é enviado ao archive.org (até duas consultas, para x.com e twitter.com) e o instantâneo encontrado é carregado a partir de web.archive.org. Google, Bing, X e Nitter só abrem se clicares no link."
     },
 
@@ -738,6 +747,7 @@
         p1: "Ein echter Scraper müsste die rohe Antwort, die x.com sendet, direkt aus JavaScript lesen, das auf deiner Seite läuft. Der Browser blockiert das per CORS: x.com sendet nicht die Header, die einer fremden Seite erlauben würden, ihre Antwort zu lesen. Selbst wenn man das über einen Proxy umgeht, verlangt X inzwischen serverseitige Authentifizierung für fast alle Inhalte — auch für die eigenen offiziellen Embed-Widgets, die ab einem bestimmten Punkt für Besucher ohne Konto leer bleiben. Nitter, die klassische Alternative, ist aus demselben Grund ausgefallen.",
         p2: "Was ohne eigenen Server zuverlässig bleibt, sind genau die Kanäle oben. Für einen garantierten Live-Feed bräuchte es einen eigenen kleinen Server — zum Beispiel eine selbst gehostete Nitter- oder RSS-Bridge-Instanz mit eigenen Konto-Tokens. Dabei helfe ich dir gern separat weiter, falls du das vertiefen willst."
       },
+      verLabel: "Version",
       footer: "Keine Telemetrie, kein Konto. Links werden lokal erzeugt. Bei „Scannen“ wird der Profilname an archive.org gesendet (bis zu zwei Abfragen, für x.com und twitter.com) und der gefundene Schnappschuss von web.archive.org geladen. Google, Bing, X und Nitter öffnen sich nur, wenn du auf den Link klickst."
     }
   };
@@ -802,6 +812,7 @@
   var txtWhyP1 = document.getElementById("txtWhyP1");
   var txtWhyP2 = document.getElementById("txtWhyP2");
   var txtFooter = document.getElementById("txtFooter");
+  var txtVerLabel = document.getElementById("txtVerLabel");
   var txtInputHint = document.getElementById("txtInputHint");
 
   var EXTRA = {
@@ -1034,6 +1045,7 @@
     txtWhyP2.textContent = t.why.p2;
 
     txtFooter.textContent = t.footer;
+    txtVerLabel.textContent = t.verLabel;
     txtInputHint.textContent = EXTRA[state.lang].inputHint;
 
     if (state.handle) applyHandleLinks();
