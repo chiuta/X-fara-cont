@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "slug": "x-fara-cont",
+  "name": "X fără cont — post de ascultare",
+  "version": "1.1.0",
+  "updated": "2026-10-14",
+  "description": "Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 7 limbi, un singur fișier HTML, fără telemetrie.",
+  "egress": [
+    {
+      "host": "*.archive.org",
+      "via": [
+        "csp:frame-src"
+      ]
+    },
+    {
+      "host": "archive.org",
+      "via": [
+        "csp:connect-src",
+        "fetch"
+      ]
+    },
+    {
+      "host": "web.archive.org",
+      "via": [
+        "csp:connect-src",
+        "csp:frame-src"
+      ]
+    }
+  ],
+  "permissions": [
+    "serviceWorker"
+  ],
+  "storageKeys": [],
+  "sizeBytes": 149761,
+  "sha256": "a8cac9d263aed3d2518c2fe154472b0ea71cca37a8ec3fc25491f5200bd347f5",
+  "csp": {
+    "present": true,
+    "directives": {
+      "default-src": "'none'",
+      "script-src": "sha256×3",
+      "style-src": "'unsafe-inline'",
+      "connect-src": "https://archive.org https://web.archive.org",
+      "frame-src": "https://web.archive.org https://*.archive.org",
+      "base-uri": "'none'",
+      "form-action": "'none'",
+      "manifest-src": "'self'",
+      "worker-src": "'self'",
+      "img-src": "'self'"
+    },
+    "scriptInline": "hash",
+    "connect": "https://archive.org https://web.archive.org"
+  },
+  "features": {
+    "export": true,
+    "import": true,
+    "i18n": [
+      "ro",
+      "en",
+      "fr",
+      "it",
+      "es",
+      "pt",
+      "de"
+    ],
+    "pwa": {
+      "manifest": true,
+      "serviceWorker": true
+    },
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "kit": {
+    "version": "1.0.0",
+    "modules": [
+      "core",
+      "label",
+      "bundle"
+    ]
+  },
+  "selfSerializing": false
+}
