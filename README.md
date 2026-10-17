@@ -76,7 +76,7 @@ Surse verificate la 11.10.2026: privacyguides.org (7 sept. 2026, „Alternate X.
 
 ## Licență
 
-Licența nu este încă declarată.
+MIT — vezi fișierul [LICENSE](LICENSE).
 
 ## Autor
 
@@ -84,4 +84,4 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## English summary
 
-X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. Licence not yet declared.
+X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).
