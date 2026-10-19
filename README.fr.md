@@ -10,7 +10,7 @@ Ensemble d'outils pour consulter les profils publics de X (ex-Twitter) sans comp
 
 **Application en ligne :** https://chiuta.github.io/X-fara-cont/
 
-![Capture d'écran](screenshot.png)
+![Capture d'écran](screenshot.fr.png)
 
 ## Présentation
 

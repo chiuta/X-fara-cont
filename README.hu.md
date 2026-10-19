@@ -10,7 +10,7 @@ Eszközkészlet az X (korábban Twitter) nyilvános profiljainak fiók nélküli
 
 **Online alkalmazás:** https://chiuta.github.io/X-fara-cont/
 
-![Képernyőkép](screenshot.png)
+![Képernyőkép](screenshot.hu.png)
 
 ## Mi ez
 

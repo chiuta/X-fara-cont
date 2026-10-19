@@ -10,7 +10,7 @@ A toolkit for viewing public profiles on X (formerly Twitter) without an account
 
 **Live app:** https://chiuta.github.io/X-fara-cont/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.en.png)
 
 ## What it is
 

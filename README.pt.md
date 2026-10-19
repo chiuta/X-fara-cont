@@ -10,7 +10,7 @@ Conjunto de ferramentas para ver perfis públicos do X (antigo Twitter) sem cont
 
 **Aplicação online:** https://chiuta.github.io/X-fara-cont/
 
-![Captura de ecrã](screenshot.png)
+![Captura de ecrã](screenshot.pt.png)
 
 ## O que é
 

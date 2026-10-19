@@ -10,7 +10,7 @@ Set di strumenti per visualizzare i profili pubblici di X (ex Twitter) senza acc
 
 **App online:** https://chiuta.github.io/X-fara-cont/
 
-![Schermata](screenshot.png)
+![Schermata](screenshot.it.png)
 
 ## Che cos'è
 

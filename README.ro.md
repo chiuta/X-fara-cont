@@ -10,7 +10,7 @@ Set de unelte pentru vizualizarea profilurilor publice de pe X (ex-Twitter) făr
 
 **Live:** https://chiuta.github.io/X-fara-cont/
 
-![Captura de ecran](screenshot.png)
+![Captura de ecran](screenshot.ro.png)
 
 ## Ce este
 

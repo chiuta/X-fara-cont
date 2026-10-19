@@ -10,7 +10,7 @@ Werkzeugsatz zum Ansehen öffentlicher Profile auf X (ehemals Twitter) ohne Kont
 
 **Online-App:** https://chiuta.github.io/X-fara-cont/
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot.de.png)
 
 ## Was es ist
 
