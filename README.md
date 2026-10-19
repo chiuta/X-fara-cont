@@ -1,87 +1,89 @@
 # X fără cont
 
-Set de unelte pentru vizualizarea profilurilor publice de pe X (ex-Twitter) fără cont, în 7 limbi, într-un singur fișier HTML.
+**English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Live:** https://chiuta.github.io/X-fara-cont/
+**Version:** 1.1.0 · **Last updated:** 2026-10-14
 
-**Versiune:** 1.1.0 · **Ultima actualizare:** 14 octombrie 2026
+A toolkit for viewing public profiles on X (formerly Twitter) without an account, in 7 languages, in a single HTML file.
 
-![Captura de ecran](screenshot.png)
+**Live app:** https://chiuta.github.io/X-fara-cont/
 
-## Ce este
+![Screenshot](screenshot.png)
 
-Introduci un nume de profil sau un link; aplicația generează patru „canale” de acces, toate fără cont și fără garanții: link direct, arhivă Wayback Machine, index de căutare (Google/Bing) și trimitere către instanțe Nitter. Nu este un scraper: nu citește conținutul X (browserul blochează asta prin CORS), ci doar construiește linkuri și verifică disponibilitatea unui instantaneu la archive.org.
+## What it is
 
-## Funcții
+You enter a profile name or a link; the application generates four access "channels", all without an account and without guarantees: a direct link, a Wayback Machine archive, a search index (Google/Bing) and a pointer to Nitter instances. It is not a scraper: it does not read X content (the browser blocks that through CORS), it only builds links and checks whether a snapshot is available at archive.org.
 
-- Interfață în 7 limbi: RO, EN, FR, IT, ES, PT, DE (limba browserului este detectată automat, altfel RO; se poate schimba din butoane).
-- Acceptă `@nume`, `nume`, un link de profil sau un link de postare x.com / twitter.com (`…/nume/status/123…`); numele este validat (1–15 litere, cifre sau `_`), iar numele de secțiuni ale site-ului (`home`, `explore`, `i`, `search` etc.) sunt respinse. Pentru o postare, linkurile directe, interogarea Wayback, căutarea Google/Bing și linkul „Cere un instantaneu nou” vizează adresa exactă a postării.
-- Pentru linkuri de postare, afișează data creării postării (UTC), calculată local din ID (ID-urile „snowflake” conțin marca de timp; calculul se aplică doar ID-urilor de după noiembrie 2010). Ajută la alegerea instantaneului Wayback potrivit; nu se face nicio cerere de rețea.
-- Linkul „Toate capturile arhivate” către lista completă de capturi din Wayback Machine (în toate stările canalului de arhivă).
-- Rând de ajutor deasupra câmpului cu formatele acceptate; tasta `/` mută focusul în câmp.
-- Canal 1 — linkuri directe către x.com și twitter.com.
-- Canal 2 — interoghează API-ul `archive.org/wayback/available` (x.com, apoi twitter.com) și, dacă găsește un instantaneu, îl afișează într-un cadru izolat (sandbox) și oferă link către Wayback Machine; altfel oferă „Cere un instantaneu nou”. Interogarea are timeout de 8 secunde, iar o nouă scanare o anulează pe cea anterioară.
-- Canal 3 — căutări Google și Bing pentru `site:x.com OR site:twitter.com "nume"` (se deschid doar la click).
-- Canal 4 — link către lista de instanțe Nitter (GitHub) și tiparul de adresă.
+## Features
 
-## Manual de utilizare
+- Interface in 7 languages: RO, EN, FR, IT, ES, PT, DE (the browser language is detected automatically, otherwise RO; it can be changed with the buttons).
+- Accepts `@name`, `name`, a profile link or an x.com / twitter.com post link (`…/name/status/123…`); the name is validated (1–15 letters, digits or `_`), and the site's section names (`home`, `explore`, `i`, `search`, etc.) are rejected. For a post, the direct links, the Wayback query, the Google/Bing search and the "Request a new snapshot" link all target the exact address of the post.
+- For post links, it shows the creation date of the post (UTC), computed locally from the ID (snowflake IDs contain a timestamp; the calculation only applies to IDs from after November 2010). This helps in choosing the right Wayback snapshot; no network request is made.
+- The "All archived captures" link to the full list of captures in the Wayback Machine (in all states of the archive channel).
+- A help row above the field with the accepted formats; the `/` key moves focus to the field.
+- Channel 1 — direct links to x.com and twitter.com.
+- Channel 2 — queries the `archive.org/wayback/available` API (x.com, then twitter.com) and, if it finds a snapshot, displays it in an isolated (sandboxed) frame and offers a link to the Wayback Machine; otherwise it offers "Request a new snapshot". The query has an 8-second timeout, and a new scan cancels the previous one.
+- Channel 3 — Google and Bing searches for `site:x.com OR site:twitter.com "name"` (opened only on click).
+- Channel 4 — link to the list of Nitter instances (GitHub) and the address pattern.
 
-1. Alege limba din butoanele de sus (opțional).
-2. Scrie numele profilului sau lipește linkul și apasă „Scanează”.
-3. Folosește linkurile din fiecare canal; la „Arhivă Wayback” așteaptă rezultatul verificării.
-4. Dacă nu există arhivă, poți cere una nouă prin linkul oferit (se deschide pe web.archive.org).
+## User guide
 
-## Confidențialitate și rețea
+1. Choose the language with the buttons at the top (optional).
+2. Type the profile name or paste the link and press "Scan".
+3. Use the links in each channel; for "Wayback archive", wait for the result of the check.
+4. If there is no archive, you can request a new one through the link provided (it opens on web.archive.org).
 
-- Stocare locală: nu folosește `localStorage`, `sessionStorage`, IndexedDB sau cookie-uri.
-- Fără telemetrie, fără conturi, fără scripturi sau fonturi externe. Politica CSP din pagină permite conexiuni doar către archive.org.
-- La „Scanează”, **numele profilului este trimis către archive.org**: până la 2 interogări (una pentru x.com, una pentru twitter.com, a doua doar dacă prima nu găsește nimic). Dacă există instantaneu, cadrul încarcă o pagină de pe web.archive.org (încă un contact cu archive.org; adresa ta IP este vizibilă pentru ei). Nu se trimite referrer.
-- Linkurile către x.com, twitter.com, google.com, bing.com, github.com (Nitter) și web.archive.org (salvare) se deschid doar dacă le apeși.
-- Nu cere permisiuni de browser.
+## Privacy and network
 
-## Limite și avertismente
+- Local storage: it does not use `localStorage`, `sessionStorage`, IndexedDB or cookies.
+- No telemetry, no accounts, no external scripts or fonts. The CSP in the page only allows connections to archive.org.
+- On "Scan", **the profile name is sent to archive.org**: up to 2 queries (one for x.com, one for twitter.com, the second only if the first finds nothing). If a snapshot exists, the frame loads a page from web.archive.org (one more contact with archive.org; your IP address is visible to them). No referrer is sent.
+- Links to x.com, twitter.com, google.com, bing.com, github.com (Nitter) and web.archive.org (saving) open only if you click them.
+- It requests no browser permissions.
 
-- Nicio cale nu e garantată: X poate cere autentificare oricând, arhivele pot lipsi sau pot fi vechi, instanțele Nitter sunt instabile.
-- Afirmațiile din interfață despre starea X/Nitter în 2026 (de exemplu „X a închis aproape orice altă cale”) sunt observații ale autorului. Starea Nitter/XCancel a fost verificată la 11.10.2026 (vezi Istoric); ea se poate schimba oricând.
-- Arhiva poate conține conținut al unor terți; cadrul este izolat, dar tratează-l ca pe orice pagină externă.
-- Aplicația nu este afiliată cu X Corp., Internet Archive, Google, Microsoft sau proiectul Nitter.
+## Limits and warnings
 
-## Rulare locală / offline
+- No path is guaranteed: X can require authentication at any time, archives may be missing or outdated, Nitter instances are unstable.
+- The statements in the interface about the state of X/Nitter in 2026 (for example "X has closed almost every other path") are the author's observations. The state of Nitter/XCancel was checked on 11.10.2026 (see History); it can change at any time.
+- The archive may contain third-party content; the frame is isolated, but treat it like any external page.
+- The application is not affiliated with X Corp., Internet Archive, Google, Microsoft or the Nitter project.
 
-Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
+## Running locally / offline
 
-## Istoric / Changelog
+Download `index.html` and open it in a browser. Link generation works without internet; the archive check and external links need a connection.
+
+## History / Changelog
 
 ### 1.1.0 — 2026-10-14
-- Copie de rezervă și etichetare date (fff-kit).
+- Backup and data labelling (fff-kit).
 
-### 12 octombrie 2026 (v1.0.0)
-- 1.0.0 — 2026-10-12: versiunea și data ultimei actualizări sunt afișate în aplicație
+### 12 October 2026 (v1.0.0)
+- 1.0.0 — 2026-10-12: the version and the date of the last update are shown in the application
 
-### 11 octombrie 2026 (a treia intrare)
-- Corectată depășirea orizontală la 360 px (reprodusă cu un link de postare lung: scrollWidth 483 → 360); linkurile și tiparul Nitter se rup acum pe mai multe rânduri.
-- Data postării calculată din ID, în cele 7 limbi.
+### 11 October 2026 (third entry)
+- Fixed horizontal overflow at 360 px (reproduced with a long post link: scrollWidth 483 → 360); links and the Nitter pattern now wrap onto several lines.
+- Post date computed from the ID, in all 7 languages.
 
-### 11 octombrie 2026 (a doua intrare)
-- Suport pentru linkuri de postare (`/status/<număr>`): instantaneu Wayback, căutare și linkuri pentru adresa exactă a postării.
-- Respinse numele rezervate de site (`home`, `explore`, `i`…) care erau acceptate ca nume de profil; link „Toate capturile arhivate”; rând de ajutor și scurtătura `/` (traduse în 7 limbi).
-- Politica CSP: `script-src` cu hash în loc de `'unsafe-inline'`.
-- Captura de ecran actualizată (rândul de ajutor).
+### 11 October 2026 (second entry)
+- Support for post links (`/status/<number>`): Wayback snapshot, search and links for the exact address of the post.
+- Rejected the site's reserved names (`home`, `explore`, `i`…) that were being accepted as profile names; "All archived captures" link; help row and the `/` shortcut (translated into 7 languages).
+- CSP: `script-src` with a hash instead of `'unsafe-inline'`.
+- Screenshot updated (the help row).
 
-### 11 octombrie 2026
-- Cardul „Oglinzi Nitter” (în toate cele 7 limbi) arată acum situația la 11.10.2026: notificare de încetare de la X în august 2026, reluarea anunțată de proiectul Nitter, XCancel revenit online, nitter.net oficial încă nefuncțional.
-- Axe: 0 violări, fără depășire orizontală la 360 px.
+### 11 October 2026
+- The "Nitter mirrors" card (in all 7 languages) now shows the situation as of 11.10.2026: cease-and-desist notice from X in August 2026, resumption announced by the Nitter project, XCancel back online, the official nitter.net still not working.
+- Axe: 0 violations, no horizontal overflow at 360 px.
 
-Surse verificate la 11.10.2026: privacyguides.org (7 sept. 2026, „Alternate X.com frontend Nitter announces it will continue despite the cease and desist”), cybernews.com, alternativeto.net (sept. 2026).
+Sources checked on 11.10.2026: privacyguides.org (7 Sept. 2026, "Alternate X.com frontend Nitter announces it will continue despite the cease and desist"), cybernews.com, alternativeto.net (Sept. 2026).
 
-## Licență
+## License
 
-MIT — vezi fișierul [LICENSE](LICENSE).
+MIT — see the [LICENSE](LICENSE) file.
 
-## Autor
+## Author
 
 Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
-## English summary
+## Summary
 
 X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).
