@@ -86,6 +86,6 @@ MIT — vezi fișierul [LICENSE](LICENSE).
 
 Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
-## English summary
+## Rezumat
 
-X without an account is a single-file, 8-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).
+X fără cont este un set de instrumente într-un singur fișier, în 8 limbi, pentru a vedea profiluri publice X (Twitter) fără autentificare: linkuri directe, căutare în Wayback Machine, interogări în motoare de căutare și un indicator către oglinzi Nitter. Sunt acceptate și linkuri către postări (…/status/123). Nu este un scraper. Nu folosește stocarea browserului și nici scripturi terțe. La „Scan”, numele profilului este trimis către archive.org (până la două căutări), iar o copie găsită este afișată într-un cadru izolat (sandbox) de pe web.archive.org. Licență: MIT (vezi LICENSE).
