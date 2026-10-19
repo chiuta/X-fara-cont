@@ -2,9 +2,11 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.1.0 · **Last updated:** 2026-10-14
+**Version:** 1.2.0 · **Last updated:** 2026-10-19
 
-A toolkit for viewing public profiles on X (formerly Twitter) without an account, in 7 languages, in a single HTML file.
+Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+A toolkit for viewing public profiles on X (formerly Twitter) without an account, in 8 languages, in a single HTML file.
 
 **Live app:** https://chiuta.github.io/X-fara-cont/
 
@@ -16,7 +18,7 @@ You enter a profile name or a link; the application generates four access "chann
 
 ## Features
 
-- Interface in 7 languages: RO, EN, FR, IT, ES, PT, DE (the browser language is detected automatically, otherwise RO; it can be changed with the buttons).
+- Interface in 8 languages: RO, EN, FR, IT, ES, PT, DE, HU (the browser language is detected automatically, otherwise RO; it can be changed with the buttons).
 - Accepts `@name`, `name`, a profile link or an x.com / twitter.com post link (`…/name/status/123…`); the name is validated (1–15 letters, digits or `_`), and the site's section names (`home`, `explore`, `i`, `search`, etc.) are rejected. For a post, the direct links, the Wayback query, the Google/Bing search and the "Request a new snapshot" link all target the exact address of the post.
 - For post links, it shows the creation date of the post (UTC), computed locally from the ID (snowflake IDs contain a timestamp; the calculation only applies to IDs from after November 2010). This helps in choosing the right Wayback snapshot; no network request is made.
 - The "All archived captures" link to the full list of captures in the Wayback Machine (in all states of the archive channel).
@@ -86,4 +88,4 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 
 ## Summary
 
-X without an account is a single-file, 7-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).
+X without an account is a single-file, 8-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).

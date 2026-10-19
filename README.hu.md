@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.1.0 · **Utolsó frissítés:** 2026-10-14
+**Verzió:** 1.2.0 · **Utolsó frissítés:** 2026-10-19
 
-Eszközkészlet az X (korábban Twitter) nyilvános profiljainak fiók nélküli megtekintéséhez, 7 nyelven, egyetlen HTML-fájlban.
+A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Eszközkészlet az X (korábban Twitter) nyilvános profiljainak fiók nélküli megtekintéséhez, 8 nyelven, egyetlen HTML-fájlban.
 
 **Online alkalmazás:** https://chiuta.github.io/X-fara-cont/
 
@@ -16,7 +18,7 @@ Megadsz egy profilnevet vagy egy hivatkozást; az alkalmazás négy hozzáféré
 
 ## Funkciók
 
-- Felület 7 nyelven: RO, EN, FR, IT, ES, PT, DE (a böngésző nyelvét automatikusan felismeri, egyébként RO; a gombokkal módosítható).
+- Felület 8 nyelven: RO, EN, FR, IT, ES, PT, DE, HU (a böngésző nyelvét automatikusan felismeri, egyébként RO; a gombokkal módosítható).
 - Elfogadja a `@név`, `név` alakot, egy profilhivatkozást vagy egy x.com / twitter.com bejegyzéshivatkozást (`…/név/status/123…`); a név érvényesítésre kerül (1–15 betű, számjegy vagy `_`), a webhely szekciónevei (`home`, `explore`, `i`, `search` stb.) pedig elutasításra kerülnek. Bejegyzés esetén a közvetlen hivatkozások, a Wayback-lekérdezés, a Google/Bing-keresés és az „Új pillanatkép kérése” hivatkozás a bejegyzés pontos címére mutat.
 - Bejegyzéshivatkozásoknál megjeleníti a bejegyzés létrehozásának dátumát (UTC), amelyet helyben, az azonosítóból számol ki (a „snowflake” azonosítók időbélyeget tartalmaznak; a számítás csak a 2010 novembere utáni azonosítókra érvényes). Segít kiválasztani a megfelelő Wayback-pillanatképet; hálózati kérés nem történik.
 - A „Minden archivált pillanatkép” hivatkozás a Wayback Machine pillanatképeinek teljes listájára (az archívumcsatorna minden állapotában).
@@ -86,4 +88,4 @@ Alexio — Alexandru-Ionuț Chiuță, kapcsolat: alexio@trom.tf
 
 ## Összefoglaló
 
-Az X fiók nélkül egy egyfájlos, 7 nyelvű eszközkészlet az X (Twitter) nyilvános profiljainak bejelentkezés nélküli megtekintéséhez: közvetlen hivatkozások, Wayback Machine-keresés, keresőmotoros lekérdezések és átirányítás Nitter-tükrökre. A bejegyzéshivatkozások (…/status/123) is támogatottak. Nem scraper. Nem használ böngészőtárolást és harmadik féltől származó szkripteket. A „Vizsgálat” során a profil neve elküldésre kerül az archive.org-nak (legfeljebb két lekérdezés), a talált pillanatkép pedig elkülönített keretben jelenik meg a web.archive.org-ról. Licenc: MIT (lásd LICENSE).
+Az X fiók nélkül egy egyfájlos, 8 nyelvű eszközkészlet az X (Twitter) nyilvános profiljainak bejelentkezés nélküli megtekintéséhez: közvetlen hivatkozások, Wayback Machine-keresés, keresőmotoros lekérdezések és átirányítás Nitter-tükrökre. A bejegyzéshivatkozások (…/status/123) is támogatottak. Nem scraper. Nem használ böngészőtárolást és harmadik féltől származó szkripteket. A „Vizsgálat” során a profil neve elküldésre kerül az archive.org-nak (legfeljebb két lekérdezés), a talált pillanatkép pedig elkülönített keretben jelenik meg a web.archive.org-ról. Licenc: MIT (lásd LICENSE).

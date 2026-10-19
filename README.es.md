@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.1.0 · **Última actualización:** 2026-10-14
+**Versión:** 1.2.0 · **Última actualización:** 2026-10-19
 
-Conjunto de herramientas para ver perfiles públicos de X (antes Twitter) sin cuenta, en 7 idiomas, en un único archivo HTML.
+Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Conjunto de herramientas para ver perfiles públicos de X (antes Twitter) sin cuenta, en 8 idiomas, en un único archivo HTML.
 
 **Aplicación en línea:** https://chiuta.github.io/X-fara-cont/
 
@@ -16,7 +18,7 @@ Introduces un nombre de perfil o un enlace; la aplicación genera cuatro «canal
 
 ## Funciones
 
-- Interfaz en 7 idiomas: RO, EN, FR, IT, ES, PT, DE (el idioma del navegador se detecta automáticamente, si no RO; se puede cambiar con los botones).
+- Interfaz en 8 idiomas: RO, EN, FR, IT, ES, PT, DE, HU (el idioma del navegador se detecta automáticamente, si no RO; se puede cambiar con los botones).
 - Acepta `@nombre`, `nombre`, un enlace de perfil o un enlace de publicación de x.com / twitter.com (`…/nombre/status/123…`); el nombre se valida (1–15 letras, cifras o `_`), y los nombres de secciones del sitio (`home`, `explore`, `i`, `search`, etc.) se rechazan. Para una publicación, los enlaces directos, la consulta a Wayback, la búsqueda en Google/Bing y el enlace «Solicitar una nueva instantánea» apuntan a la dirección exacta de la publicación.
 - Para los enlaces de publicación, muestra la fecha de creación de la publicación (UTC), calculada localmente a partir del ID (los ID «snowflake» contienen una marca de tiempo; el cálculo solo se aplica a los ID posteriores a noviembre de 2010). Ayuda a elegir la instantánea de Wayback adecuada; no se realiza ninguna petición de red.
 - El enlace «Todas las capturas archivadas» a la lista completa de capturas de Wayback Machine (en todos los estados del canal de archivo).
@@ -86,4 +88,4 @@ Alexio — Alexandru-Ionuț Chiuță, contacto: alexio@trom.tf
 
 ## Resumen
 
-X sin cuenta es un conjunto de herramientas en un solo archivo y en 7 idiomas para ver perfiles públicos de X (Twitter) sin iniciar sesión: enlaces directos, una consulta a Wayback Machine, búsquedas en motores de búsqueda y una remisión a espejos de Nitter. También se admiten enlaces de publicaciones (…/status/123). No es un scraper. No usa almacenamiento del navegador ni scripts de terceros. Al pulsar «Analizar», el nombre del perfil se envía a archive.org (hasta dos consultas) y una instantánea encontrada se muestra en un marco aislado desde web.archive.org. Licencia: MIT (véase LICENSE).
+X sin cuenta es un conjunto de herramientas en un solo archivo y en 8 idiomas para ver perfiles públicos de X (Twitter) sin iniciar sesión: enlaces directos, una consulta a Wayback Machine, búsquedas en motores de búsqueda y una remisión a espejos de Nitter. También se admiten enlaces de publicaciones (…/status/123). No es un scraper. No usa almacenamiento del navegador ni scripts de terceros. Al pulsar «Analizar», el nombre del perfil se envía a archive.org (hasta dos consultas) y una instantánea encontrada se muestra en un marco aislado desde web.archive.org. Licencia: MIT (véase LICENSE).

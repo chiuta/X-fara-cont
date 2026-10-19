@@ -2,9 +2,11 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · **Deutsch** · [Magyar](README.hu.md)
 
-**Version:** 1.1.0 · **Zuletzt aktualisiert:** 2026-10-14
+**Version:** 1.2.0 · **Zuletzt aktualisiert:** 2026-10-19
 
-Werkzeugsatz zum Ansehen öffentlicher Profile auf X (ehemals Twitter) ohne Konto, in 7 Sprachen, in einer einzigen HTML-Datei.
+Oberflächensprachen: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
+
+Werkzeugsatz zum Ansehen öffentlicher Profile auf X (ehemals Twitter) ohne Konto, in 8 Sprachen, in einer einzigen HTML-Datei.
 
 **Online-App:** https://chiuta.github.io/X-fara-cont/
 
@@ -16,7 +18,7 @@ Du gibst einen Profilnamen oder einen Link ein; die Anwendung erzeugt vier Zugan
 
 ## Funktionen
 
-- Oberfläche in 7 Sprachen: RO, EN, FR, IT, ES, PT, DE (die Browsersprache wird automatisch erkannt, sonst RO; sie kann über die Schaltflächen geändert werden).
+- Oberfläche in 8 Sprachen: RO, EN, FR, IT, ES, PT, DE, HU (die Browsersprache wird automatisch erkannt, sonst RO; sie kann über die Schaltflächen geändert werden).
 - Akzeptiert `@name`, `name`, einen Profil-Link oder einen Beitrags-Link von x.com / twitter.com (`…/name/status/123…`); der Name wird validiert (1–15 Buchstaben, Ziffern oder `_`), und die Namen von Bereichen der Website (`home`, `explore`, `i`, `search` usw.) werden abgelehnt. Bei einem Beitrag zielen die direkten Links, die Wayback-Abfrage, die Google-/Bing-Suche und der Link „Neuen Snapshot anfordern“ auf die genaue Adresse des Beitrags.
 - Bei Beitrags-Links zeigt sie das Erstellungsdatum des Beitrags (UTC), lokal aus der ID berechnet (Snowflake-IDs enthalten einen Zeitstempel; die Berechnung gilt nur für IDs nach November 2010). Das hilft bei der Wahl des passenden Wayback-Snapshots; es wird keine Netzwerkanfrage gestellt.
 - Der Link „Alle archivierten Aufnahmen“ zur vollständigen Liste der Aufnahmen in der Wayback Machine (in allen Zuständen des Archivkanals).
@@ -86,4 +88,4 @@ Alexio — Alexandru-Ionuț Chiuță, Kontakt: alexio@trom.tf
 
 ## Zusammenfassung
 
-X ohne Konto ist ein Werkzeugsatz in einer einzigen Datei und in 7 Sprachen, um öffentliche X-(Twitter-)Profile ohne Anmeldung anzusehen: direkte Links, eine Abfrage der Wayback Machine, Suchmaschinenabfragen und ein Verweis auf Nitter-Spiegel. Beitrags-Links (…/status/123) werden ebenfalls unterstützt. Es ist kein Scraper. Es verwendet keinen Browserspeicher und keine Skripte von Drittanbietern. Beim „Scannen“ wird der Profilname an archive.org gesendet (bis zu zwei Abfragen), und ein gefundener Snapshot wird in einem isolierten Frame von web.archive.org angezeigt. Lizenz: MIT (siehe LICENSE).
+X ohne Konto ist ein Werkzeugsatz in einer einzigen Datei und in 8 Sprachen, um öffentliche X-(Twitter-)Profile ohne Anmeldung anzusehen: direkte Links, eine Abfrage der Wayback Machine, Suchmaschinenabfragen und ein Verweis auf Nitter-Spiegel. Beitrags-Links (…/status/123) werden ebenfalls unterstützt. Es ist kein Scraper. Es verwendet keinen Browserspeicher und keine Skripte von Drittanbietern. Beim „Scannen“ wird der Profilname an archive.org gesendet (bis zu zwei Abfragen), und ein gefundener Snapshot wird in einem isolierten Frame von web.archive.org angezeigt. Lizenz: MIT (siehe LICENSE).
