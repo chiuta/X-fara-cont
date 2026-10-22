@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.1 · **Última actualización:** 2026-10-22
+**Versión:** 1.2.2 · **Última actualización:** 2026-10-22
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,9 @@ Introduces un nombre de perfil o un enlace; la aplicación genera cuatro «canal
 Descarga `index.html` y ábrelo en un navegador. La generación de enlaces funciona sin internet; la comprobación del archivo y los enlaces externos necesitan conexión.
 
 ## Historial / Registro de cambios
+
+### 1.2.2 — 2026-10-22
+- Móvil: ningún texto por debajo de 12 px y áreas táctiles de al menos 24 px (WCAG 2.5.8).
 
 ### 1.2.1 — 2026-10-22
 - El título, la meta descripción y la descripción del panel de transparencia fff-kit siguen ahora el idioma de la interfaz.

@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.2.1 · **Ultimo aggiornamento:** 2026-10-22
+**Versione:** 1.2.2 · **Ultimo aggiornamento:** 2026-10-22
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,9 @@ Inserisci il nome di un profilo o un link; l'applicazione genera quattro «canal
 Scarica `index.html` e aprilo in un browser. La generazione dei link funziona senza internet; la verifica dell'archivio e i link esterni richiedono una connessione.
 
 ## Cronologia / Changelog
+
+### 1.2.2 — 2026-10-22
+- Mobile: nessun testo sotto i 12 px e aree tattili di almeno 24 px (WCAG 2.5.8).
 
 ### 1.2.1 — 2026-10-22
 - Il titolo, la meta descrizione e la descrizione del pannello di trasparenza fff-kit seguono ora la lingua dell'interfaccia.
