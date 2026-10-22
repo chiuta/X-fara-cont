@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · **Magyar**
 
-**Verzió:** 1.2.3 · **Utolsó frissítés:** 2026-10-22
+**Verzió:** 1.2.4 · **Utolsó frissítés:** 2026-10-22
 
 A felület nyelvei: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,9 @@ Megadsz egy profilnevet vagy egy hivatkozást; az alkalmazás négy hozzáféré
 Töltsd le az `index.html` fájlt, és nyisd meg egy böngészőben. A hivatkozások előállítása internet nélkül is működik; az archívum ellenőrzéséhez és a külső hivatkozásokhoz kapcsolat szükséges.
 
 ## Előzmények / Változásnapló
+
+### 1.2.4 — 2026-10-22
+- fff-kit 1.1.4: érintési célpontok és minimális szövegméret
 
 ### 1.2.3 — 2026-10-22
 - fff-kit 1.1.2: PBKDF2 600 000 iterációval, clickjacking elleni védelem.
