@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.0 · **Última atualização:** 2026-10-19
+**Versão:** 1.2.1 · **Última atualização:** 2026-10-22
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,9 @@ Introduz um nome de perfil ou uma ligação; a aplicação gera quatro «canais�
 Descarregue `index.html` e abra-o num navegador. A geração de ligações funciona sem internet; a verificação do arquivo e as ligações externas precisam de ligação.
 
 ## Histórico / Registo de alterações
+
+### 1.2.1 — 2026-10-22
+- O título, a meta descrição e a descrição do painel de transparência fff-kit seguem agora o idioma da interface.
 
 ### 1.1.0 — 2026-10-14
 - Cópia de segurança e etiquetagem de dados (fff-kit).
