@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · **Français** · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version :** 1.2.5 · **Dernière mise à jour :** 2026-10-23
+**Version :** 1.2.6 · **Dernière mise à jour :** 2026-10-23
 
 Langues de l'interface : **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,10 @@ Vous saisissez un nom de profil ou un lien ; l'application génère quatre « ca
 Téléchargez `index.html` et ouvrez-le dans un navigateur. La génération des liens fonctionne sans internet ; la vérification de l'archive et les liens externes nécessitent une connexion.
 
 ## Historique / Journal des modifications
+
+### 1.2.6 — 2026-10-23
+- Le message « nom de profil invalide » est de nouveau traduit lors du changement de langue ; un envoi vide ne marque plus le champ comme invalide sans message.
+- Les boutons de langue ont maintenant une cible tactile de 44 × 44 px.
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4 : cibles tactiles et taille de texte minimale

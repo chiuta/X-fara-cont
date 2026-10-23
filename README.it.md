@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · **Italiano** · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versione:** 1.2.5 · **Ultimo aggiornamento:** 2026-10-23
+**Versione:** 1.2.6 · **Ultimo aggiornamento:** 2026-10-23
 
 Lingue dell'interfaccia: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,10 @@ Inserisci il nome di un profilo o un link; l'applicazione genera quattro «canal
 Scarica `index.html` e aprilo in un browser. La generazione dei link funziona senza internet; la verifica dell'archivio e i link esterni richiedono una connessione.
 
 ## Cronologia / Changelog
+
+### 1.2.6 — 2026-10-23
+- Il messaggio «nome profilo non valido» viene ritradotto al cambio di lingua; l'invio di un campo vuoto non segna più il campo come non valido senza alcun messaggio.
+- I pulsanti della lingua hanno ora un'area tattile di 44 × 44 px.
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: bersagli touch e testo minimo
