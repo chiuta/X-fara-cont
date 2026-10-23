@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · **Español** · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versión:** 1.2.5 · **Última actualización:** 2026-10-23
+**Versión:** 1.2.6 · **Última actualización:** 2026-10-23
 
 Idiomas de la interfaz: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,10 @@ Introduces un nombre de perfil o un enlace; la aplicación genera cuatro «canal
 Descarga `index.html` y ábrelo en un navegador. La generación de enlaces funciona sin internet; la comprobación del archivo y los enlaces externos necesitan conexión.
 
 ## Historial / Registro de cambios
+
+### 1.2.6 — 2026-10-23
+- El mensaje «nombre de perfil no válido» se vuelve a traducir al cambiar de idioma; enviar el campo vacío ya no lo marca como no válido sin ningún mensaje.
+- Los botones de idioma tienen ahora un área táctil de 44 × 44 px.
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: objetivos táctiles y texto mínimo

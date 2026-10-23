@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.5 · **Last updated:** 2026-10-23
+**Version:** 1.2.6 · **Last updated:** 2026-10-23
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,10 @@ You enter a profile name or a link; the application generates four access "chann
 Download `index.html` and open it in a browser. Link generation works without internet; the archive check and external links need a connection.
 
 ## History / Changelog
+
+### 1.2.6 — 2026-10-23
+- The “invalid profile name” message is now translated again when the language is switched; an empty submission no longer marks the field as invalid without any message.
+- Language buttons now have a 44 × 44 px touch target.
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: touch targets and minimum text size

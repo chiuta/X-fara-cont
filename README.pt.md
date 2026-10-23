@@ -2,7 +2,7 @@
 
 [English](README.md) · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · **Português** · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versão:** 1.2.5 · **Última atualização:** 2026-10-23
+**Versão:** 1.2.6 · **Última atualização:** 2026-10-23
 
 Idiomas da interface: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -55,6 +55,10 @@ Introduz um nome de perfil ou uma ligação; a aplicação gera quatro «canais�
 Descarregue `index.html` e abra-o num navegador. A geração de ligações funciona sem internet; a verificação do arquivo e as ligações externas precisam de ligação.
 
 ## Histórico / Registo de alterações
+
+### 1.2.6 — 2026-10-23
+- A mensagem «nome de perfil inválido» volta a ser traduzida ao mudar de idioma; enviar o campo vazio já não o marca como inválido sem qualquer mensagem.
+- Os botões de idioma têm agora uma área tátil de 44 × 44 px.
 
 ### 1.2.4 — 2026-10-22
 - fff-kit 1.1.4: alvos táteis e texto mínimo
