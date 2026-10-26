@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 1.2.7 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -27,6 +27,7 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 - Canal 2 — interoghează API-ul `archive.org/wayback/available` (x.com, apoi twitter.com) și, dacă găsește un instantaneu, îl afișează într-un cadru izolat (sandbox) și oferă link către Wayback Machine; altfel oferă „Cere un instantaneu nou”. Interogarea are timeout de 8 secunde, iar o nouă scanare o anulează pe cea anterioară.
 - Canal 3 — căutări Google și Bing pentru `site:x.com OR site:twitter.com "nume"` (se deschid doar la click).
 - Canal 4 — link către lista de instanțe Nitter (GitHub) și tiparul de adresă.
+- **Fișă de probă (2.0.0):** după scanare, un raport text cu data (UTC), linkul canonic x.com (normalizat din twitter.com/mobile), amprenta lui SHA-256, rezultatul Wayback și toate căile (arhive, căutare, Nitter). Ultima linie (`#SHA256-REPORT …`) este amprenta întregii fișe; „Verifică o fișă existentă” o recalculează. Copiere, descărcare .txt și istoric local (max. 20, doar la „Salvează”). Amprenta nu este probă juridică și nu atestă autenticitatea conținutului.
 
 ## Manual de utilizare
 

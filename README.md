@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 1.2.7 · **Last updated:** 2026-10-26
+**Version:** 2.0.0 · **Last updated:** 2026-10-26
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -27,6 +27,7 @@ You enter a profile name or a link; the application generates four access "chann
 - Channel 2 — queries the `archive.org/wayback/available` API (x.com, then twitter.com) and, if it finds a snapshot, displays it in an isolated (sandboxed) frame and offers a link to the Wayback Machine; otherwise it offers "Request a new snapshot". The query has an 8-second timeout, and a new scan cancels the previous one.
 - Channel 3 — Google and Bing searches for `site:x.com OR site:twitter.com "name"` (opened only on click).
 - Channel 4 — link to the list of Nitter instances (GitHub) and the address pattern.
+- **Evidence sheet (2.0.0):** after a scan, a text report with the UTC date, canonical x.com link (normalised from twitter.com/mobile), its SHA-256 fingerprint, the Wayback result and every path (archives, search, Nitter). The last line (`#SHA256-REPORT …`) fingerprints the whole sheet; “Verify an existing sheet” recomputes it. Copy, .txt download and local history (max 20, only on “Save”). The fingerprint is not legal proof and does not attest to authenticity.
 
 ## User guide
 
