@@ -86,7 +86,7 @@ const sheetText = (p) => p.textContent('#sheetText');
   await p.click('#sheetSave'); await p.waitForTimeout(100);
   await scan(p, '@jack'); await p.click('#sheetSave'); await p.waitForTimeout(100);
   t('2 fișe în istoric', await p.locator('#histList li').count() === 2);
-  const lk = await p.evaluate(() => Object.keys(localStorage)); t('cheie de stocare cu prefix', lk.some((k) => /x-fara-cont\.history$/.test(k)), lk.join(','));
+  const lk = await p.evaluate(() => Object.keys(localStorage)); t('cheie de stocare cu prefix', lk.includes("x-fara-cont.history"), lk.join(','));
   await p.reload(); await p.waitForTimeout(500);
   t('istoricul persistă după reîncărcare', await p.locator('#histList li').count() === 2);
   await p.click('#histBox summary');

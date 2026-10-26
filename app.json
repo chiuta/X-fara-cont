@@ -36,8 +36,8 @@
   "storageKeys": [
     "x-fara-cont.history"
   ],
-  "sizeBytes": 249034,
-  "sha256": "ac5d2541632c1fd5d7aebb7a5ba2a18918a4075f2956261998586d5348f7532d",
+  "sizeBytes": 249094,
+  "sha256": "40f699935a9ae8ba117e7c4d6d6202108f18f1de17694bccf981b0611fb0b949",
   "csp": {
     "present": true,
     "directives": {
