@@ -2,7 +2,7 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.1.0 · **Ultima actualizare:** 2026-10-27
+**Versiune:** 2.2.0 · **Ultima actualizare:** 2026-10-27
 
 **Stare:** experimental (depinde de servicii terțe care se schimbă des). **Offline:** nu — verificarea Wayback cheamă archive.org când apeși „Scanează”; linkurile directe, de căutare și de oglinzi se generează doar local și le deschizi tu.
 
@@ -116,3 +116,7 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 ## Rezumat
 
 X fără cont este un set de instrumente într-un singur fișier, în 8 limbi, pentru a vedea profiluri publice X (Twitter) fără autentificare: linkuri directe, căutare în Wayback Machine, interogări în motoare de căutare și un indicator către oglinzi Nitter. Sunt acceptate și linkuri către postări (…/status/123). Nu este un scraper. Nu folosește stocarea browserului și nici scripturi terțe. La „Scan”, numele profilului este trimis către archive.org (până la două căutări), iar o copie găsită este afișată într-un cadru izolat (sandbox) de pe web.archive.org. Licență: MIT (vezi LICENSE).
+
+## archive.today: ce s-a putut și ce nu s-a putut verifica (2.2.0)
+
+La 2026-10-27 am căutat pe web și am citit articolul Wikipedia „Archive.today” și pagina wiki Archive Team (nu am putut deschide archive.* din mediul de dezvoltare). Acolo se spune: serviciul are operator anonim, nu are API de trimitere și arată frecvent CAPTCHA; Wikipedia în engleză a interzis în 2026 legăturile către el, invocând un atac DDoS prin pagina CAPTCHA și dovezi de modificare a conținutului arhivat. Wiki-ul Archive Team documentează `https://archive.today/timegate/<url originală>` pentru ultima copie. Forma `https://archive.ph/newest/<url>` folosită de aplicație nu apare în **nicio** sursă citită, deci rămâne **neconfirmată**; nu am schimbat-o pentru că nici timegate nu s-a putut testa. Aplicația arată acum o notă scurtă lângă link (8 limbi; fr/it/es/pt/de/hu sunt traduceri automate) care atribuie aceste fapte Wikipediei și spune că aplicația nu le-a verificat. Linkul rămâne doar un link pe care îl deschizi tu.

@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.1.0 · **Last updated:** 2026-10-27
+**Version:** 2.2.0 · **Last updated:** 2026-10-27
 
 **Status:** experimental (depends on third-party services that change often). **Offline:** no — the Wayback check calls archive.org when you press “Scan”; direct, search and mirror links are only generated locally and opened by you.
 
@@ -116,3 +116,7 @@ Alexio — Alexandru-Ionuț Chiuță, contact: alexio@trom.tf
 ## Summary
 
 X without an account is a single-file, 8-language toolkit for looking at public X (Twitter) profiles without logging in: direct links, a Wayback Machine lookup, search-engine queries and a pointer to Nitter mirrors. Post links (…/status/123) are supported too. It is not a scraper. It uses no browser storage and no third-party scripts. On “Scan”, the profile name is sent to archive.org (up to two lookups) and a found snapshot is shown in a sandboxed frame from web.archive.org. License: MIT (see LICENSE).
+
+## archive.today: what could and could not be checked (2.2.0)
+
+On 2026-10-27 I searched the web and read the Wikipedia article “Archive.today” and the Archive Team wiki page (I could not open archive.* from the development environment). Reported there: the service is run anonymously; it has no submission API and shows frequent CAPTCHAs; English Wikipedia banned links to it in 2026 citing a DDoS attack through its CAPTCHA page and evidence of tampering with archived content. The Archive Team wiki documents `https://archive.today/timegate/<original url>` for the latest copy. The `https://archive.ph/newest/<url>` form used by the app appears in **none** of the sources I read, so it stays **unconfirmed**; it was not changed because the timegate form could not be tested either. The app now shows a short note next to the link (8 languages; fr/it/es/pt/de/hu are automatic translations) that attributes these facts to Wikipedia and says they were not verified by the app. The link is still only a link you open yourself.
