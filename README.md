@@ -2,7 +2,9 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.0.0 · **Last updated:** 2026-10-26
+**Version:** 2.1.0 · **Last updated:** 2026-10-27
+
+**Status:** experimental (depends on third-party services that change often). **Offline:** no — the Wayback check calls archive.org when you press “Scan”; direct, search and mirror links are only generated locally and opened by you.
 
 Interface languages: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -36,6 +38,11 @@ You enter a profile name or a link; the application generates four access "chann
 3. Use the links in each channel; for "Wayback archive", wait for the result of the check.
 4. If there is no archive, you can request a new one through the link provided (it opens on web.archive.org).
 
+## Reliability of the alternatives (2.1.0)
+
+- **Nitter:** the app keeps **no list of instances** and does not test them; it only links to the community wiki and states that most instances are down. 2.1.0 adds a visible warning that we do **not** claim which instances work, and that any instance receives the account you look up and your IP address. Treat the Nitter channel as unreliable.
+- **archive.today:** next to the Wayback result there is now a link “Open in archive.today (alternative)” to `https://archive.ph/newest/<x.com link>`. It is only a **link that you open yourself**: the app makes no automatic request to archive.today (no CAPTCHA/availability check) and does not know whether a snapshot exists. The URL pattern `/newest/` and the availability of the service are **to be verified** by you; the service is run by third parties, has its own terms and may show a CAPTCHA.
+
 ## Privacy and network
 
 - Local storage: it does not use `localStorage`, `sessionStorage`, IndexedDB or cookies.
@@ -56,6 +63,9 @@ You enter a profile name or a link; the application generates four access "chann
 Download `index.html` and open it in a browser. Link generation works without internet; the archive check and external links need a connection.
 
 ## History / Changelog
+
+### 2.1.0 — 2026-10-27
+- archive.today alternative link, explicit warning about Nitter instances, status/offline lines, `CHANGELOG.md`. Previously: v2.0.0.
 
 ### 1.2.6 — 2026-10-23
 - The “invalid profile name” message is now translated again when the language is switched; an empty submission no longer marks the field as invalid without any message.

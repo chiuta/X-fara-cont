@@ -1,4 +1,4 @@
-// Teste v2.0.0: fișa de probă (amprentă SHA-256, verificare, istoric local, export).
+// Teste v2.1.0: fișa de probă (amprentă SHA-256, verificare, istoric local, export).
 import {createRequire as __fffCR} from 'node:module';
 import {readFileSync as __fffRF} from 'node:fs';
 import {createRequire} from 'module';

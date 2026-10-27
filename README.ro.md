@@ -2,7 +2,9 @@
 
 [English](README.md) · **Română** · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Versiune:** 2.0.0 · **Ultima actualizare:** 2026-10-26
+**Versiune:** 2.1.0 · **Ultima actualizare:** 2026-10-27
+
+**Stare:** experimental (depinde de servicii terțe care se schimbă des). **Offline:** nu — verificarea Wayback cheamă archive.org când apeși „Scanează”; linkurile directe, de căutare și de oglinzi se generează doar local și le deschizi tu.
 
 Limbile interfeței: **Română, English, Français, Italiano, Español, Português (PT), Deutsch, Magyar**
 
@@ -36,6 +38,11 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 3. Folosește linkurile din fiecare canal; la „Arhivă Wayback” așteaptă rezultatul verificării.
 4. Dacă nu există arhivă, poți cere una nouă prin linkul oferit (se deschide pe web.archive.org).
 
+## Fiabilitatea alternativelor (2.1.0)
+
+- **Nitter:** aplicația **nu ține o listă de instanțe** și nu le testează; trimite doar la wiki-ul comunității și spune că majoritatea instanțelor au picat. 2.1.0 adaugă un avertisment vizibil că **nu** afirmăm care instanțe funcționează și că orice instanță primește contul căutat și adresa ta IP. Consideră canalul Nitter nefiabil.
+- **archive.today:** lângă rezultatul Wayback există acum linkul „Deschide în archive.today (alternativă)” către `https://archive.ph/newest/<link x.com>`. Este doar un **link pe care îl deschizi tu**: aplicația nu face nicio cerere automată către archive.today (fără verificare CAPTCHA/disponibilitate) și nu știe dacă există o captură. Tiparul `/newest/` și disponibilitatea serviciului sunt **de verificat** de tine; serviciul aparține unor terți, are termeni proprii și poate cere CAPTCHA.
+
 ## Confidențialitate și rețea
 
 - Stocare locală: nu folosește `localStorage`, `sessionStorage`, IndexedDB sau cookie-uri.
@@ -56,6 +63,9 @@ Introduci un nume de profil sau un link; aplicația generează patru „canale�
 Descarcă `index.html` și deschide-l în browser. Generarea linkurilor funcționează fără internet; verificarea arhivei și linkurile externe au nevoie de conexiune.
 
 ## Istoric / Changelog
+
+### 2.1.0 — 2026-10-27
+- Link alternativ archive.today, avertisment explicit despre instanțele Nitter, linii Stare/Offline, `CHANGELOG.md`. Anterior: v2.0.0.
 
 ### 1.2.6 — 2026-10-23
 - Mesajul „nume de profil invalid” se retraduce acum la schimbarea limbii; trimiterea unui câmp gol nu mai marchează câmpul ca invalid fără niciun mesaj.
