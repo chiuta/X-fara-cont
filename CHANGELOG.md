@@ -2,6 +2,11 @@
 
 Format SemVer (MAJOR.MINOR.PATCH).
 
+## 2.2.1 — 2026-11-02
+
+### Surse actualizate (runda 2, verificat la 2026-11-02)
+- Cardul „Oglinzi Nitter” (în toate cele 8 limbi): textul „la 11.10.2026 XCancel a revenit online” era depășit; XCancel s-a suspendat din nou pe 14 septembrie 2026 „până la o nouă notificare”, iar depozitul Nitter a fost arhivat (doar citire) pe 11 septembrie 2026 (TechCrunch, 15.09.2026). Canalul este marcat ca nefuncțional.
+
 ## 2.2.0 — 2026-10-27
 
 Anterior: v2.1.0.
