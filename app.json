@@ -36,8 +36,8 @@
   "storageKeys": [
     "x-fara-cont.history"
   ],
-  "sizeBytes": 256900,
-  "sha256": "9d9c6725bff23efb63a1b7a2fb423422ea3b6340e088a54c0031b17dc24c2fcf",
+  "sizeBytes": 397334,
+  "sha256": "91f0925fe0b1b5f829329dd7dd1a5475a010781a63dd3ae71c4c2e72e9b57cbb",
   "csp": {
     "present": true,
     "directives": {
@@ -77,7 +77,11 @@
       "store",
       "dialog",
       "label",
-      "bundle"
+      "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history"
     ]
   },
   "kit": {
@@ -87,7 +91,11 @@
       "store",
       "dialog",
       "label",
-      "bundle"
+      "bundle",
+      "qr",
+      "p2p",
+      "sync",
+      "history"
     ]
   },
   "selfSerializing": false
