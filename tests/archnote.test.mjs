@@ -1,4 +1,4 @@
-// Teste v2.2.1: nota despre archive.today (atribuită Wikipedia, neverificată de aplicație) apare doar odată cu linkul, în 8 limbi.
+// Teste v2.2.2: nota despre archive.today (atribuită Wikipedia, neverificată de aplicație) apare doar odată cu linkul, în 8 limbi.
 import {createRequire} from 'node:module';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
