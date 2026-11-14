@@ -31,18 +31,19 @@
     "clipboard",
     "serviceWorker",
     "localStorage",
-    "Web Crypto"
+    "Web Crypto",
+    "WebGL"
   ],
   "storageKeys": [
     "x-fara-cont.history"
   ],
-  "sizeBytes": 453014,
-  "sha256": "ab1c47a15c2a9db2b5d154d9f0b0c2c906086aaf2a9f330a56cbb384c023204d",
+  "sizeBytes": 504655,
+  "sha256": "fa277fe9c0cb75f2e7a718b3c24a4d410720a2797eb970c528f407787ad017d5",
   "csp": {
     "present": true,
     "directives": {
       "default-src": "'none'",
-      "script-src": "sha256×3",
+      "script-src": "sha256×4",
       "style-src": "'unsafe-inline'",
       "connect-src": "https://archive.org https://web.archive.org",
       "frame-src": "https://web.archive.org https://*.archive.org",
