@@ -36,8 +36,8 @@
   "storageKeys": [
     "x-fara-cont.history"
   ],
-  "sizeBytes": 453002,
-  "sha256": "2a349b48067a35f9c2a9730fcbd8f946d3063a1f92786781b4fb3e54c7071021",
+  "sizeBytes": 453014,
+  "sha256": "ab1c47a15c2a9db2b5d154d9f0b0c2c906086aaf2a9f330a56cbb384c023204d",
   "csp": {
     "present": true,
     "directives": {
@@ -50,7 +50,7 @@
       "form-action": "'none'",
       "manifest-src": "'self'",
       "worker-src": "'self'",
-      "img-src": "'self'"
+      "img-src": "'self' data:"
     },
     "scriptInline": "hash",
     "connect": "https://archive.org https://web.archive.org"
