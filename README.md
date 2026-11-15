@@ -2,7 +2,7 @@
 
 **English** · [Română](README.ro.md) · [Français](README.fr.md) · [Italiano](README.it.md) · [Español](README.es.md) · [Português](README.pt.md) · [Deutsch](README.de.md) · [Magyar](README.hu.md)
 
-**Version:** 2.2.9 · **Last updated:** 2026-11-15
+**Version:** 2.3.0 · **Last updated:** 2026-11-15
 
 **Status:** experimental (depends on third-party services that change often). **Offline:** no — the Wayback check calls archive.org when you press “Scan”; direct, search and mirror links are only generated locally and opened by you.
 

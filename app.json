@@ -2,7 +2,7 @@
   "schema": 1,
   "slug": "x-fara-cont",
   "name": "X fără cont — post de ascultare",
-  "version": "2.2.9",
+  "version": "2.3.0",
   "updated": "2026-11-15",
   "description": "Set de unelte pentru vizualizarea profilurilor publice X (ex-Twitter) fără cont: link direct, arhivă Wayback, index de căutare, oglinzi Nitter. 8 limbi, un singur fișier HTML, fără telemetrie.",
   "egress": [
@@ -37,8 +37,8 @@
   "storageKeys": [
     "x-fara-cont.history"
   ],
-  "sizeBytes": 509943,
-  "sha256": "dbb6dac5ee536083885483d7581a2eae3063d79ecd8f80a8c810cc9b1f892e5d",
+  "sizeBytes": 547965,
+  "sha256": "da525d39ba7ee6c17205d4752420030f4c670d33d11ab39804110bd35e930988",
   "csp": {
     "present": true,
     "directives": {
@@ -79,6 +79,7 @@
       "dialog",
       "exit",
       "view",
+      "a11y",
       "ux",
       "label",
       "bundle",
@@ -89,13 +90,14 @@
     ]
   },
   "kit": {
-    "version": "1.5.0",
+    "version": "1.6.0",
     "modules": [
       "core",
       "store",
       "dialog",
       "exit",
       "view",
+      "a11y",
       "ux",
       "label",
       "bundle",
